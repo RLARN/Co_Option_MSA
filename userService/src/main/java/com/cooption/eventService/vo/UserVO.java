@@ -1,4 +1,4 @@
-package com.cooption.userservice.vo;
+package com.cooption.eventService.vo;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class UserVO {
-    
+
 	private int userSeq;
 	private String userId;
 	private String userPwd;

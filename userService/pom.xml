@@ -8,11 +8,11 @@
         <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>userService</artifactId>
+    <groupId>com.cooption</groupId>
+    <artifactId>EventService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>userService</name>
-    <description>userService</description>
+    <name>EventService</name>
+    <description>EventService</description>
     <url/>
     <licenses>
         <license/>
@@ -68,6 +68,40 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+        <!--   구글 캘린더관련     -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.32.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-jackson2 -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client-jackson2</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-calendar -->
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-calendar</artifactId>
+            <version>v3-rev411-1.25.0</version>
+        </dependency>
+        
+        <!-- MyBatis Spring Boot Starter -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.2</version> <!-- 버전은 필요에 따라 조정하세요 -->
+        </dependency>
+        <!-- MyBatis Core -->
+        <dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>3.0.3</version>
+		</dependency>
+        
     </dependencies>
     <dependencyManagement>
         <dependencies>

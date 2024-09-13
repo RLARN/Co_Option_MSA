@@ -4,7 +4,7 @@
 
 	
 	<resultMap id="UserBaseInfo" type="com.cooption.userservice.vo.UserVO">
-	    <result property="userSeq" column="USER_SEQ" jdbcType="VARCHAR" />
+	    <result property="userSeq" column="USER_SEQ" jdbcType="INTEGER" />
 	    <result property="userId" column="USER_ID" jdbcType="VARCHAR" />
 	    <result property="userPwd" column="USER_PWD" jdbcType="VARCHAR" />
 	    <result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
@@ -19,7 +19,7 @@
 
 	<insert id="createUser" parameterType="com.cooption.userservice.vo.UserVO">
 	    <!-- `USER_SEQ` 값을 생성 -->
-	    <selectKey keyProperty="userSeq" resultType="String" order="BEFORE">
+	    <selectKey keyProperty="userSeq" resultType="Integer" order="BEFORE">
 	        SELECT COALESCE(MAX(USER_SEQ), 0) + 1 AS userSeq 
 	        FROM co_option.USER_MST
 	    </selectKey>
@@ -55,8 +55,12 @@
 
 	<select id="selectUserList" parameterType="com.cooption.userservice.vo.UserVO" resultMap="UserBaseInfo">
 	
-		SELECT USER_SEQ, USER_ID, USER_PWD, USER_NAME, USER_MAIL, DELETE_YN, REG_DT, REG_ID, UPD_DT, UPD_ID	
-		FROM co_option.USER_MST
+		SELECT 
+			USER_SEQ, USER_ID, USER_PWD,
+			USER_NAME, USER_MAIL, DELETE_YN,
+			REG_DT, REG_ID, UPD_DT, UPD_ID	
+		FROM
+			co_option.USER_MST
 		
 	</select>
 
