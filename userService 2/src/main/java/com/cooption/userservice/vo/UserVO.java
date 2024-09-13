@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UserVO {
     
-	private String userSeq;
+	private int userSeq;
 	private String userId;
 	private String userPwd;
 	private String userName;
@@ -17,11 +17,10 @@ public class UserVO {
 	private String regId;
 	private Date updDt;
 	private String updId;
-	
-	public String getUserSeq() {
+	public int getUserSeq() {
 		return userSeq;
 	}
-	public void setUserSeq(String userSeq) {
+	public void setUserSeq(int userSeq) {
 		this.userSeq = userSeq;
 	}
 	public String getUserId() {
