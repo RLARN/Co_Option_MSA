@@ -70,6 +70,7 @@ __pycache__/
 .env.test.local
 .env.production.local
 .json
+#제이슨추가됬는데 왜안됨
 
 # Ignore build output directories
 /target/
