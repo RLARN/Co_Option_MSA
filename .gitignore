@@ -93,3 +93,4 @@ build/
 # Ignore application-specific files
 /configurations/
 /runtime/
+*.json
