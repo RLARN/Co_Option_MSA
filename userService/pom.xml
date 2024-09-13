@@ -88,6 +88,20 @@
             <artifactId>google-api-services-calendar</artifactId>
             <version>v3-rev411-1.25.0</version>
         </dependency>
+        
+        <!-- MyBatis Spring Boot Starter -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.2</version> <!-- 버전은 필요에 따라 조정하세요 -->
+        </dependency>
+        <!-- MyBatis Core -->
+        <dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>3.0.3</version>
+		</dependency>
+        
     </dependencies>
     <dependencyManagement>
         <dependencies>
