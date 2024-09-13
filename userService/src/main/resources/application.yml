@@ -1,21 +1,25 @@
 server:
-  port: 9001
+  port: 9002
 
 spring:
   application:
-    name: userService
+    name: eventService
 
   datasource:
-#    url: jdbc:mariadb://192.168.0.4:3306/co_option
-#    username: hammer
-#    password: hammer
-#    driver-class-name: org.mariadb.jdbc.Driver
-
-
-    url: jdbc:mariadb://localhost:3306/BBS
-    username: root
-    password: 5466
+    url: jdbc:mariadb://192.168.0.4:3306/co_option
+    username: hammer
+    password: hammer
     driver-class-name: org.mariadb.jdbc.Driver
+    mapper-locations: classpath:mapper/*.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.cooption.eventService.vo
+
+#    url: jdbc:mariadb://localhost:3306/BBS
+#    username: root
+#    password: 5466
+#    driver-class-name: org.mariadb.jdbc.Driver
 
 eureka:
   client:
