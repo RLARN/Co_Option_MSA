@@ -82,34 +82,33 @@ public class EventService {
         System.out.println("");
     }
 
-    public void insertEvent(EventVO evnetVO) {
+    public void insertEvent(EventVO eventVO) {
 
     	// 1 == create success、0 == create fail
     	int check = 0;
     	
     	// test obj
-    	EventVO eventVO2 = new EventVO();
+    	//EventVO eventVO2 = new EventVO();
 
     	// RegId, UpdId, UserSeq => session에서 가져와서 설정
     	
     	
 
-		eventVO2.setEventNm("hammer");
-		eventVO2.setEventDesc("hammer");
-		//eventVO2.setEventStartDate("2024/09/13");
-		//eventVO2.setEventEndDate("2024/09/13");
+		eventVO.setEventNm(eventVO.getSummary());
+		eventVO.setEventDesc(eventVO.getDescription());
+		eventVO.setEventStartDate(eventVO.getStart());
+		eventVO.setEventEndDate(eventVO.getEnd());
 		//eventVO2.setCompleteYn("N");
 		//eventVO2.setDeleteYn("N");
 		//eventVO2.setRegDt(null); sql now
-		eventVO2.setRegId("hammer");
+		eventVO.setRegId("hammer");
 		//eventVO2.setUpdDt(null); sql now
-		eventVO2.setUpdId("hammer");
-		
-		eventVO2.setUserSeq(10);
-		
+		eventVO.setUpdId("hammer");
+		eventVO.setUserSeq(10);
 		
 		
-		check = eventMapper.insertEvent(eventVO2);
+		
+		check = eventMapper.insertEvent(eventVO);
 		System.out.println("check : " + check);
 
 		if (check == 0) {
@@ -117,10 +116,10 @@ public class EventService {
 	    }
 		
 
-		int eventSeq = eventVO2.getEventSeq();
+		int eventSeq = eventVO.getEventSeq();
 	    System.out.println("Generated eventSeq: " + eventSeq);
 
-	    check = eventMapper.insertEventUserRel(eventVO2);
+	    check = eventMapper.insertEventUserRel(eventVO);
 
 		if (check == 0) {
             throw new RuntimeException("create user fail");

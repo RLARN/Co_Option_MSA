@@ -7,8 +7,8 @@
         <result property="eventSeq" column="EVENT_SEQ" jdbcType="INTEGER" />
         <result property="eventNm" column="EVENT_NM" jdbcType="VARCHAR" />
         <result property="eventDesc" column="EVENT_DESC" jdbcType="VARCHAR" />
-        <result property="eventStartDate" column="EVENT_START_DATE" jdbcType="VARCHAR" />
-        <result property="eventEndDate" column="EVENT_END_DATE" jdbcType="VARCHAR" />
+        <result property="eventStartDate" column="EVENT_START_DATE" jdbcType="DATE" />
+        <result property="eventEndDate" column="EVENT_END_DATE" jdbcType="DATE" />
         <result property="completeYn" column="COMPLETE_YN" jdbcType="VARCHAR" />
         <result property="deleteYn" column="DELETE_YN" jdbcType="VARCHAR" />
         <result property="regDt" column="REG_DT" jdbcType="DATE" />
@@ -32,8 +32,8 @@
 	        <if test="eventSeq != null">EVENT_SEQ,</if>
 	        <if test="eventNm != null">EVENT_NM,</if>
 	        <if test="eventDesc != null">EVENT_DESC,</if>
-	        EVENT_START_DATE,
-	        EVENT_END_DATE,
+	        <if test="eventStartDate != null">EVENT_START_DATE,</if>
+	        <if test="eventEndDate != null">EVENT_END_DATE,</if>
 	        COMPLETE_YN,
 	        DELETE_YN,
 	        REG_DT,
@@ -46,8 +46,8 @@
 	        <if test="eventSeq != null">#{eventSeq},</if>
 	        <if test="eventNm != null">#{eventNm},</if>
 	        <if test="eventDesc != null">#{eventDesc},</if>
-			'DARETW',
-	        'DARTRW',
+	        <if test="eventStartDate != null">#{eventStartDate},</if>
+	        <if test="eventEndDate != null">#{eventEndDate},</if>
 	        'N',
 	        'N',
 	        NOW(),

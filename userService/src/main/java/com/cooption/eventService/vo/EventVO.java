@@ -1,6 +1,9 @@
 package com.cooption.eventService.vo;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -10,14 +13,20 @@ public class EventVO {
 	private int eventSeq;
 	private String eventNm;
 	private String eventDesc;
-	private String eventStartDate;
-	private String eventEndDate;
+	private Date eventStartDate;
+	private Date eventEndDate;
 	private String completeYn;
 	private String deleteYn;
 	private Date regDt;
 	private String regId;
 	private Date updDt;
 	private String updId;
+	
+	// test
+	private String summary;
+	private String description;
+    private Date start;
+    private Date end;
 	
 	// UserVO userSeq
 	private int userSeq;
@@ -40,16 +49,16 @@ public class EventVO {
 	public void setEventDesc(String eventDesc) {
 		this.eventDesc = eventDesc;
 	}
-	public String getEventStartDate() {
+	public Date getEventStartDate() {
 		return eventStartDate;
 	}
-	public void setEventStartDate(String eventStartDate) {
+	public void setEventStartDate(Date eventStartDate) {
 		this.eventStartDate = eventStartDate;
 	}
-	public String getEventEndDate() {
+	public Date getEventEndDate() {
 		return eventEndDate;
 	}
-	public void setEventEndDate(String eventEndDate) {
+	public void setEventEndDate(Date eventEndDate) {
 		this.eventEndDate = eventEndDate;
 	}
 	public String getCompleteYn() {
@@ -94,11 +103,38 @@ public class EventVO {
 	public void setUserSeq(int userSeq) {
 		this.userSeq = userSeq;
 	}
+	public String getSummary() {
+		return summary;
+	}
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Date getStart() {
+		return start;
+	}
+	public void setStart(Date start) {
+		this.start = start;
+	}
+	public Date getEnd() {
+		return end;
+	}
+	public void setEnd(Date end) {
+		this.end = end;
+	}
 	@Override
 	public String toString() {
 		return "EventVO [eventSeq=" + eventSeq + ", eventNm=" + eventNm + ", eventDesc=" + eventDesc
 				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", completeYn=" + completeYn
 				+ ", deleteYn=" + deleteYn + ", regDt=" + regDt + ", regId=" + regId + ", updDt=" + updDt + ", updId="
-				+ updId + ", userSeq=" + userSeq + "]";
+				+ updId + ", summary=" + summary + ", description=" + description + ", start=" + start + ", end=" + end
+				+ ", userSeq=" + userSeq + "]";
 	}
+	
+
 }
