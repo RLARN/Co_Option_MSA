@@ -1,0 +1,30 @@
+server:
+  port: 9003
+
+spring:
+  application:
+    name: taskService
+
+  datasource:
+#    url: jdbc:mariadb://192.168.0.4:3306/co_option
+#    username: hammer
+#    password: hammer
+#    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/BBS
+    username: root
+    password: 5466
+    driver-class-name: org.mariadb.jdbc.Driver
+    #mapper-locations: classpath:mapper/*.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xmlZ
+  type-aliases-package: com.cooption.taskService.vo
+
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
