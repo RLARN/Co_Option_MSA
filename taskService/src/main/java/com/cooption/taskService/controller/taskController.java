@@ -6,6 +6,7 @@ import java.security.GeneralSecurityException;
 import com.cooption.taskService.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +24,14 @@ public class taskController {
     private TaskService taskService;
 
     @PostMapping("/addTask")
-    public void createEvent(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+    public void createTask() throws GeneralSecurityException, IOException {
 
     	ObjectMapper mapper = new ObjectMapper();
 
     	TaskVO taskVO = new TaskVO();
 
     	try {
-            taskVO = mapper.readValue(eventInfoJson, TaskVO.class);
+            //taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
 
             // 일정 생성
 	    	//taskService.createEvent(taskVO);

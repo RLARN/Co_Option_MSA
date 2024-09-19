@@ -8,6 +8,7 @@
 		<result property="eventSeq" column="EVENT_SEQ" jdbcType="INTEGER" />
         <result property="taskNm" column="TASK_NM" jdbcType="VARCHAR" />
         <result property="taskDesc" column="TASK_DESC" jdbcType="VARCHAR" />
+        <result property="taskDate" column="TASK_DATE" jdbcType="DATE" />
         <result property="completeYn" column="COMPLETE_YN" jdbcType="VARCHAR" />
 		<result property="taskType" column="TASK_TYPE" jdbcType="VARCHAR" />
         <result property="deleteYn" column="DELETE_YN" jdbcType="VARCHAR" />
@@ -22,8 +23,8 @@
 	<insert id="insertTask" parameterType="com.cooption.taskService.vo.TaskVO" useGeneratedKeys="true" keyProperty="eventSeq">
 	    <!-- `USER_SEQ` 값을 생성 -->
 	    <selectKey keyProperty="taskSeq" resultType="Integer" order="BEFORE">
-	        SELECT COALESCE(MAX(EVENT_SEQ), 0) + 1 AS eventSeq 
-	        FROM co_option.EVENT_MST
+	        SELECT COALESCE(MAX(TASK_SEQ), 0) + 1 AS taskSeq 
+	        FROM co_option.TASK_MST
 	    </selectKey>
 	
 	    <!-- INSERT 문 -->
@@ -33,6 +34,7 @@
 			<if test="eventSeq != null">EVENT_SEQ,</if>
 	        <if test="taskNm != null">TASK_NM,</if>
 	        <if test="taskDesc != null">TASK_DESC,</if>
+	        TASK_DATE,
 			<if test="taskType != null">TASK_TYPE,</if>
 	        COMPLETE_YN,
 	        DELETE_YN,
@@ -43,10 +45,11 @@
 	    </trim>
 	
 	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-	        <if test="eventSeq != null">#{eventSeq},</if>
+	        <if test="taskSeq != null">#{taskSeq},</if>
 			<if test="eventSeq != null">#{eventSeq},</if>
-	        <if test="eventNm != null">#{eventNm},</if>
-	        <if test="eventDesc != null">#{eventDesc},</if>
+	        <if test="taskNm != null">#{taskNm},</if>
+	        <if test="taskDesc != null">#{taskDesc},</if>
+	        NOW(),
 			<if test="taskType != null">#{taskType},</if>
 	        'N',
 	        'N',

@@ -1,16 +1,7 @@
 package com.cooption.taskService.service;
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.GeneralSecurityException;
-import java.util.Arrays;
-import java.util.Date;
-
 import com.cooption.taskService.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.cooption.taskService.common.taskCommon;
@@ -31,6 +22,7 @@ public class TaskService {
     	// test obj
     	//EventVO eventVO2 = new EventVO();
 
+    	TaskVO taskVO2 = new TaskVO();
     	// RegId, UpdId, UserSeq => session에서 가져와서 설정
 /*		taskVO.setTaskNm(taskVO.getTaskNm());
 		taskVO.setTaskDesc(taskVO.getTaskDesc());
@@ -38,25 +30,25 @@ public class TaskService {
         taskVO.setCompleteYn(taskVO.getCompleteYn());
         taskVO.setTaskType(taskVO.getTaskType());
         taskVO.setDeleteYn(taskVO.getDeleteYn());*/
+    	taskVO2.setEventSeq(1);
+		taskVO2.setTaskNm("teck");
+		taskVO2.setTaskDesc("kimcmiMaster");
+		//taskVO2.setTaskDate(null);
+		taskVO2.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
+		taskVO2.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
+		taskVO2.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
+        taskVO2.setRegId("hammer");
+		taskVO2.setUpdId("hammer");
 
-		taskVO.setTaskNm("기술고문 고문");
-		taskVO.setTaskDesc("kimcmiMaster");
-		taskVO.setTaskDate(null);
-		taskVO.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
-		taskVO.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
-		taskVO.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
-        taskVO.setRegId("hammer");
-		taskVO.setUpdId("hammer");
-
-		check = taskMapper.insertTask(taskVO);
+		check = taskMapper.insertTask(taskVO2);
 		System.out.println("check : " + check);
 
 		if (check == 0) {
 	        throw new RuntimeException("create user fail");
 	    }
 
-		int eventSeq = taskVO.getEventSeq();
-	    System.out.println("Generated eventSeq: " + eventSeq);
+		int taskSeq = taskVO2.getTaskSeq();
+	    System.out.println("Generated taskSeq: " + taskSeq);
 
 	    //check = taskMapper.insertEventUserRel(taskVO);
 
