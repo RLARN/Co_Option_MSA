@@ -18,7 +18,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xmlZ
-  type-aliases-package: com.cooption.taskService.vo
+  type-aliases-package: com.cooption.requestService.vo
 
 
 
