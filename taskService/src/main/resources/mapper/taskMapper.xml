@@ -11,6 +11,7 @@
         <result property="taskDate" column="TASK_DATE" jdbcType="DATE" />
         <result property="completeYn" column="COMPLETE_YN" jdbcType="VARCHAR" />
 		<result property="taskType" column="TASK_TYPE" jdbcType="VARCHAR" />
+        <result property="approvedYn" column="APPROVED_YN" jdbcType="VARCHAR" />
         <result property="deleteYn" column="DELETE_YN" jdbcType="VARCHAR" />
         <result property="regDt" column="REG_DT" jdbcType="DATE" />
         <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
@@ -37,6 +38,7 @@
 	        TASK_DATE,
 			<if test="taskType != null">TASK_TYPE,</if>
 	        COMPLETE_YN,
+	        APPROVED_YN,
 	        DELETE_YN,
 	        REG_DT,
 	        <if test="regId != null">REG_ID,</if>
@@ -51,6 +53,7 @@
 	        <if test="taskDesc != null">#{taskDesc},</if>
 	        NOW(),
 			<if test="taskType != null">#{taskType},</if>
+	        'N',
 	        'N',
 	        'N',
 	        NOW(),

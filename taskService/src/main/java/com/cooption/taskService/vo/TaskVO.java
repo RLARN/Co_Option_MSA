@@ -14,8 +14,8 @@ public class TaskVO {
     private Date taskDate;
     private String completeYn;
     private String taskType;
+    private String approvedYn;
     private String deleteYn;
-
     private Date regDt;
     private String regId;
     private Date updDt;
@@ -62,6 +62,12 @@ public class TaskVO {
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
 	}
+	public String getApprovedYn() {
+		return approvedYn;
+	}
+	public void setApprovedYn(String approvedYn) {
+		this.approvedYn = approvedYn;
+	}
 	public String getDeleteYn() {
 		return deleteYn;
 	}
@@ -92,6 +98,12 @@ public class TaskVO {
 	public void setUpdId(String updId) {
 		this.updId = updId;
 	}
-
+	@Override
+	public String toString() {
+		return "TaskVO [taskSeq=" + taskSeq + ", eventSeq=" + eventSeq + ", taskNm=" + taskNm + ", taskDesc=" + taskDesc
+				+ ", taskDate=" + taskDate + ", completeYn=" + completeYn + ", taskType=" + taskType + ", approvedYn="
+				+ approvedYn + ", deleteYn=" + deleteYn + ", regDt=" + regDt + ", regId=" + regId + ", updDt=" + updDt
+				+ ", updId=" + updId + "]";
+	}
 
 }

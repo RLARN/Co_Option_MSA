@@ -35,8 +35,9 @@ public class TaskService {
 		taskVO2.setTaskDesc("kimcmiMaster");
 		//taskVO2.setTaskDate(null);
 		taskVO2.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
-		taskVO2.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
-		taskVO2.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
+		taskVO2.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
+		taskVO2.setApprovedYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
+		taskVO2.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
         taskVO2.setRegId("hammer");
 		taskVO2.setUpdId("hammer");
 

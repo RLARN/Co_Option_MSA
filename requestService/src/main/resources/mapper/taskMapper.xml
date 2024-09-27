@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooption.requestService.mapper.RequestMapper">
+
+	
+	<resultMap id="requestBaseInfo" type="com.cooption.requestService.vo.RequestVO">
+        <result property="requestSeq" column="request_SEQ" jdbcType="INTEGER" />
+        <result property="requestNm" column="request_NM" jdbcType="VARCHAR" />
+        <result property="requestDesc" column="request_DESC" jdbcType="VARCHAR" />
+        <result property="completeYn" column="COMPLETE_YN" jdbcType="VARCHAR" />
+		<result property="requestType" column="request_TYPE" jdbcType="VARCHAR" />
+        <result property="deleteYn" column="DELETE_YN" jdbcType="VARCHAR" />
+        <result property="regDt" column="REG_DT" jdbcType="DATE" />
+        <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
+        <result property="updDt" column="UPD_DT" jdbcType="DATE" />
+        <result property="updId" column="UPD_ID" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+	<!-- useGeneratedKeys="true" keyProperty="requestSeq" => requestSEQ리턴값으로 설정 -->
+	<insert id="insertrequest" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true" keyProperty="eventSeq">
+	    <!-- `USER_SEQ` 값을 생성 -->
+	    <selectKey keyProperty="requestSeq" resultType="Integer" order="BEFORE">
+	        SELECT COALESCE(MAX(EVENT_SEQ), 0) + 1 AS eventSeq 
+	        FROM co_option.EVENT_MST
+	    </selectKey>
+	
+	    <!-- INSERT 문 -->
+	    INSERT INTO co_option.request_MST
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	        <if test="requestSeq != null">request_SEQ,</if>
+			<if test="eventSeq != null">EVENT_SEQ,</if>
+	        <if test="requestNm != null">request_NM,</if>
+	        <if test="requestDesc != null">request_DESC,</if>
+			<if test="requestType != null">request_TYPE,</if>
+	        COMPLETE_YN,
+	        DELETE_YN,
+	        REG_DT,
+	        <if test="regId != null">REG_ID,</if>
+	        UPD_DT,
+	        <if test="updId != null">UPD_ID,</if>
+	    </trim>
+	
+	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+	        <if test="eventSeq != null">#{eventSeq},</if>
+			<if test="eventSeq != null">#{eventSeq},</if>
+	        <if test="eventNm != null">#{eventNm},</if>
+	        <if test="eventDesc != null">#{eventDesc},</if>
+			<if test="requestType != null">#{requestType},</if>
+	        'N',
+	        'N',
+	        NOW(),
+	        <if test="regId != null">#{regId},</if>
+	        NOW(),
+	        <if test="updId != null">#{updId},</if>
+	    </trim>
+	</insert>
+
+<!--	<insert id="insertEventUserRel" parameterType="com.cooption.requestService.vo.RequestVO">
+		INSERT INTO co_option.event_user_rel (EVENT_SEQ,USER_SEQ) VALUES(#{eventSeq},#{userSeq})
+	</insert>-->
+
+</mapper>
