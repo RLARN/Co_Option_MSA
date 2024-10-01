@@ -1,7 +1,9 @@
 package com.cooption.requestService.service;
 
 
+import com.cooption.requestService.client.TaskServiceClient;
 import com.cooption.requestService.vo.RequestVO;
+import com.cooption.requestService.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,45 +17,59 @@ public class RequestService {
     @Autowired
     private RequestMapper requestMapper;
 
-    public void insertRequest(RequestVO requestVO) {
+	@Autowired
+	private TaskServiceClient taskServiceClient;  // Feign Client 주입
 
-    	// 1 == create success、0 == create fail
-    	int check = 0;
+	public void insertTaskRequest(RequestVO requestVO) {
 
-    	// test obj
-    	//EventVO eventVO2 = new EventVO();
+		TaskVO taskVO = new TaskVO();
+		taskVO.setApprovedYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_N);//요청 미승인 상태
 
-    	// RegId, UpdId, UserSeq => session에서 가져와서 설정
-/*		requestVO.setrequestNm(requestVO.getrequestNm());
-		requestVO.setrequestDesc(requestVO.getrequestDesc());
-        requestVO.setrequestDate(requestVO.getrequestDate());
-        requestVO.setCompleteYn(requestVO.getCompleteYn());
-        requestVO.setrequestType(requestVO.getrequestType());
-        requestVO.setDeleteYn(requestVO.getDeleteYn());*/
+		//TASK 등록
+		taskServiceClient.createTask(taskVO);
 
-//		requestVO.setrequestNm("기술고문 고문");
-//		requestVO.setrequestDesc("kimcmiMaster");
-//		requestVO.setRequestDate(null);
-//		RequestVO.setCompleteYn(RequestCommon.Request_COMM_CD_IS_COMPLETE_N);
-//		RequestVO.setRequestType(RequestCommon.Request_COMM_CD_IS_COMPLETE_Y);
-//		RequestVO.setDeleteYn(RequestCommon.Request_COMM_CD_IS_COMPLETE_Y);
-//        RequestVO.setRegId("hammer");
-//		RequestVO.setUpdId("hammer");
+		insertRequest(requestVO);//request MST 등록
+		insertTaskRequestRel(requestVO);//task - request 관계 테이블 등록
+		insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
 
-		check = requestMapper.insertRequest(requestVO);
-		System.out.println("check : " + check);
-
-		if (check == 0) {
-	        throw new RuntimeException("create user fail");
-	    }
-
-		//int eventSeq = requestVO.getEventSeq();
-	    //System.out.println("Generated eventSeq: " + eventSeq);
-
-	    //check = requestMapper.insertEventUserRel(requestVO);
-
-		if (check == 0) {
-            throw new RuntimeException("create user fail");
-        }
     }
+
+	public void requestTaskApproval(RequestVO requestVO){
+
+		//TASK 승인 프로세스
+		TaskVO taskVO = new TaskVO();
+		taskServiceClient.modifyTask(taskVO);//task에 추가
+		modifyUserRequestRel(requestVO);
+	}
+
+	public void requestTaskReject(RequestVO requestVO){
+
+		//TASK 거절프로세스
+		TaskVO taskVO = new TaskVO();
+		modifyUserRequestRel(requestVO);
+	}
+
+	public void insertRequest(RequestVO requestVO){
+		int check = requestMapper.insertRequest(requestVO);
+	}
+
+	public void insertTaskRequestRel(RequestVO requestVO){
+		int check = requestMapper.insertTaskRequestRel(requestVO);
+	}
+
+	public void modifyRequest(RequestVO requestVO){
+		requestMapper.modifyRequest(requestVO);
+	}
+
+	public void modifyTaskRequestRel(RequestVO requestVO){
+		requestMapper.modifyTaskRequestRel(requestVO);
+	}
+
+	public void insertUserRequestRel(RequestVO requestVO){
+		int check = requestMapper.insertUserRequestRel(requestVO);
+	}
+
+	public void modifyUserRequestRel(RequestVO requestVO){
+		requestMapper.modifyUserRequestRel(requestVO);
+	}
 }

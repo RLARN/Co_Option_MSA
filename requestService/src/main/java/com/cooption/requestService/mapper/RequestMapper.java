@@ -9,4 +9,14 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RequestMapper {
 
     int insertRequest(RequestVO requestVO);
+
+    void modifyRequest(RequestVO requestVO);
+
+    int insertTaskRequestRel(RequestVO requestVO);
+
+    void modifyTaskRequestRel(RequestVO requestVO);
+
+    int insertUserRequestRel(RequestVO requestVO);
+
+    void modifyUserRequestRel(RequestVO requestVO);
 }

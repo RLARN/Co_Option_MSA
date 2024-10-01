@@ -16,6 +16,6 @@ public class RequestCommon {
 	public final static String GOOGLE_COMM_CD_IS_CALENDAR_ID = "2b785f150767e0395fddf90330cbda151ae7e2bd4d9368866d453bf5f3c16761@group.calendar.google.com";
 
 
-	public final static String TASK_COMM_CD_IS_COMPLETE_Y = "Y";
-	public final static String TASK_COMM_CD_IS_COMPLETE_N = "N";
+	public final static String REQUEST_COMM_CD_IS_COMPLETE_Y = "Y";
+	public final static String REQUEST_COMM_CD_IS_COMPLETE_N = "N";
 }
