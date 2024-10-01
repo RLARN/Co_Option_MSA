@@ -17,34 +17,54 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/coOption")
 public class taskController {
 
     @Autowired
     private TaskService taskService;
 
+
     @PostMapping("/addTask")
     public void createTask() throws GeneralSecurityException, IOException {
 
-    	ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-    	TaskVO taskVO = new TaskVO();
+        TaskVO taskVO = new TaskVO();
 
-    	try {
-            //taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
+        try {
 
-            // 일정 생성
-	    	//taskService.createEvent(taskVO);
-
-	    	// 일정 DB 등록
-	    	taskService.insertTask(taskVO);
+            // 일정 DB 등록
+            taskService.insertTask(taskVO);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    	//System.out.println("eventVO : " + eventVO);
-    	
+        //System.out.println("eventVO : " + eventVO);
+
     }
 
+    @PostMapping("/modifyTask")
+    public void modifyTask() throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        TaskVO taskVO = new TaskVO();
+
+        try {
+            //taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
+
+            // 일정 생성
+            //taskService.createEvent(taskVO);
+
+            // 일정 DB 등록
+            taskService.modifyTask(taskVO);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println("eventVO : " + eventVO);
+
+    }
 }
