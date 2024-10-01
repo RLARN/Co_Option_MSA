@@ -2,6 +2,7 @@ package com.cooption.requestService.service;
 
 
 import com.cooption.requestService.client.TaskServiceClient;
+import com.cooption.requestService.vo.EventVO;
 import com.cooption.requestService.vo.RequestVO;
 import com.cooption.requestService.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,4 +73,34 @@ public class RequestService {
 	public void modifyUserRequestRel(RequestVO requestVO){
 		requestMapper.modifyUserRequestRel(requestVO);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 일정 요청 프로세스
+	
+	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
+
+		requestVO.setEventSeq(eventVO.getEventSeq());
+		
+		requestMapper.insertRequest(requestVO);//request MST 등록
+		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
+		requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
+
+    }
+	
+	
+	
+	
+	
 }
