@@ -14,8 +14,9 @@ public class RequestVO {
     private String completeYn;
     private String requestType;
     private String deleteYn;
-
+    private int eventSeq;
     private int userSeq;
+    private int taskSeq;
     private String userAppYn;
 
     private Date regDt;

@@ -5,6 +5,7 @@
 	
 	<resultMap id="requestBaseInfo" type="com.cooption.requestService.vo.RequestVO">
         <result property="requestSeq" column="REQUEST_SEQ" jdbcType="INTEGER" />
+		<result property="eventSeq" column="EVENT_SEQ" jdbcType="INTEGER" />
         <result property="requestNm" column="REQUEST_NM" jdbcType="VARCHAR" />
         <result property="requestDesc" column="REQUEST_DESC" jdbcType="VARCHAR" />
         <result property="completeYn" column="COMPLETE_YN" jdbcType="VARCHAR" />
@@ -21,15 +22,14 @@
 	<insert id="insertRequest" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true" keyProperty="requestSeq">
 	    <!-- `USER_SEQ` 값을 생성 -->
 	    <selectKey keyProperty="requestSeq" resultType="Integer" order="BEFORE">
-	        SELECT COALESCE(MAX(EVENT_SEQ), 0) + 1 AS requestSeq
-	        FROM co_option.EVENT_MST
+	        SELECT COALESCE(MAX(REQUEST_SEQ), 0) + 1 AS requestSeq
+	        FROM co_option.REQUEST_MST
 	    </selectKey>
 	
 	    <!-- INSERT 문 -->
-	    INSERT INTO co_option.request_MST
+	    INSERT INTO co_option.REQUEST_MST
 	    <trim prefix="(" suffix=")" suffixOverrides=",">
 	        <if test="requestSeq != null">REQUEST_SEQ,</if>
-			<if test="eventSeq != null">EVENT_SEQ,</if>
 	        <if test="requestNm != null">REQUEST_NM,</if>
 	        <if test="requestDesc != null">REQUEST_DESC,</if>
 			<if test="requestType != null">REQUEST_TYPE,</if>
@@ -42,10 +42,9 @@
 	    </trim>
 	
 	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-	        <if test="eventSeq != null">#{eventSeq},</if>
-			<if test="eventSeq != null">#{eventSeq},</if>
-	        <if test="eventNm != null">#{eventNm},</if>
-	        <if test="eventDesc != null">#{eventDesc},</if>
+	        <if test="requestSeq != null">#{requestSeq},</if>
+	        <if test="requestNm != null">#{requestNm},</if>
+	        <if test="requestDesc != null">#{requestDesc},</if>
 			<if test="requestType != null">#{requestType},</if>
 	        'N',
 	        'N',
@@ -92,13 +91,13 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="requestSeq != null">REQUEST_SEQ,</if>
 			<if test="userSeq != null">USER_SEQ,</if>
-			<if test="userAppYn != null">USER_APP_YN,</if>
+			USER_APP_YN,
 		</trim>
 
 		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
 			<if test="requestSeq != null">#{requestSeq},</if>
 			<if test="userSeq != null">#{userSeq},</if>
-			<if test="userAppYn != null">#{userAppYn},</if>
+			""
 		</trim>
 	</insert>
 	
@@ -116,23 +115,15 @@
 			<if test="eventSeq != null">#{eventSeq},</if>
 		</trim>
 	</insert>
-	
-	<!-- 일정 승인 프로세스 -->
-	<update id="requestEventApproval" parameterType="com.cooption.requestService.vo.RequestVO">
-		UPDATE co_option.REQUEST_USER_REL
+
+	<update id="modifyUserRequestRel" parameterType="com.cooption.requestService.vo.RequestVO">
+		UPDATE co_option.TASK_MST
 		<set>
-			<if test="userAppYn != null">USER_APP_YN = 'Y',</if>
+			<if test="userAppYn != null">
+				USER_APP_YN = #{userAppYn}
+			</if>
 		</set>
-		WHERE REQUEST_SEQ = #{requestSeq} AND USER_SEQ = #{userSeq}
+		WHERE REQUEST_SEQ = #{requestSeq}
+		AND USER_SEQ = #{userSeq}
 	</update>
-	
-	<!-- 일정 거절 프로세스 -->
-	<update id="requestEventReject" parameterType="com.cooption.requestService.vo.RequestVO">
-		UPDATE co_option.REQUEST_USER_REL
-		<set>
-			<if test="userAppYn != null">USER_APP_YN = 'N',</if>
-		</set>
-		WHERE REQUEST_SEQ = #{requestSeq} AND USER_SEQ = #{userSeq}
-	</update>
-	
 </mapper>

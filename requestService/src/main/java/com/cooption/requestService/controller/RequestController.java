@@ -21,7 +21,7 @@ public class RequestController {
 
     @PostMapping("/addTaskRequest")
     //여기로 테스크 요청이 들어온다
-    public void createEvent() throws GeneralSecurityException, IOException {
+    public void createTask() throws GeneralSecurityException, IOException {
 
     	//ObjectMapper mapper = new ObjectMapper();
 
@@ -62,6 +62,52 @@ public class RequestController {
 
     	//System.out.println("eventVO : " + eventVO);
     	
+    }
+
+    @PostMapping("/requestTaskApproval")
+    //여기로 테스크 요청이 들어온다
+    public void requestTaskApproval() throws GeneralSecurityException, IOException {
+
+        //ObjectMapper mapper = new ObjectMapper();
+
+        RequestVO requestVO = new RequestVO();
+
+        try {
+
+            // task 등록
+            //requestService.insertTaskRequest(requestVO);
+            requestService.requestTaskApproval(requestVO);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println("eventVO : " + eventVO);
+
+    }
+
+    @PostMapping("/requestTaskReject")
+    //여기로 테스크 요청이 들어온다
+    public void requestTaskReject() throws GeneralSecurityException, IOException {
+
+        //ObjectMapper mapper = new ObjectMapper();
+
+        RequestVO requestVO = new RequestVO();
+
+        try {
+
+            // task 등록
+            //requestService.insertTaskRequest(requestVO);
+            requestService.requestTaskReject(requestVO);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println("eventVO : " + eventVO);
+
     }
 
 }
