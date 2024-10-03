@@ -101,4 +101,19 @@
 			<if test="userAppYn != null">#{userAppYn},</if>
 		</trim>
 	</insert>
+	
+	
+	<!-- 일정 요청 프로세스 -->
+	<insert id="insertEventRequestRel" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true">
+		INSERT INTO co_option.EVENT_REQUEST_REL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="requestSeq != null">REQUEST_SEQ,</if>
+			<if test="eventSeq != null">EVENT_SEQ,</if>
+		</trim>
+
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="requestSeq != null">#{requestSeq},</if>
+			<if test="eventSeq != null">#{eventSeq},</if>
+		</trim>
+	</insert>
 </mapper>

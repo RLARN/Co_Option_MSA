@@ -19,4 +19,7 @@ public interface RequestMapper {
     int insertUserRequestRel(RequestVO requestVO);
 
     void modifyUserRequestRel(RequestVO requestVO);
+    
+    // 일정 요청 프로세스
+    int insertEventRequestRel(RequestVO requestVO);
 }
