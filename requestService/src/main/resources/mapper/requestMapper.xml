@@ -116,4 +116,23 @@
 			<if test="eventSeq != null">#{eventSeq},</if>
 		</trim>
 	</insert>
+	
+	<!-- 일정 승인 프로세스 -->
+	<update id="requestEventApproval" parameterType="com.cooption.requestService.vo.RequestVO">
+		UPDATE co_option.REQUEST_USER_REL
+		<set>
+			<if test="userAppYn != null">USER_APP_YN = 'Y',</if>
+		</set>
+		WHERE REQUEST_SEQ = #{requestSeq} AND USER_SEQ = #{userSeq}
+	</update>
+	
+	<!-- 일정 거절 프로세스 -->
+	<update id="requestEventReject" parameterType="com.cooption.requestService.vo.RequestVO">
+		UPDATE co_option.REQUEST_USER_REL
+		<set>
+			<if test="userAppYn != null">USER_APP_YN = 'N',</if>
+		</set>
+		WHERE REQUEST_SEQ = #{requestSeq} AND USER_SEQ = #{userSeq}
+	</update>
+	
 </mapper>
