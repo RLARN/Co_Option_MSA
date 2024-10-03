@@ -24,9 +24,6 @@ public class RequestVO {
     private Date updDt;
     private String updId;
 
-    // 일정 요청 프로세스
-    private int eventSeq;
-
 	public int getRequestSeq() {
 		return requestSeq;
 	}
