@@ -21,14 +21,15 @@
 	<insert id="insertRequest" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true" keyProperty="requestSeq">
 	    <!-- `USER_SEQ` 값을 생성 -->
 	    <selectKey keyProperty="requestSeq" resultType="Integer" order="BEFORE">
-	        SELECT COALESCE(MAX(REQUEST_SEQ), 0) + 1 AS requestSeq
-	        FROM co_option.REQUEST_MST
+	        SELECT COALESCE(MAX(EVENT_SEQ), 0) + 1 AS requestSeq
+	        FROM co_option.EVENT_MST
 	    </selectKey>
 	
 	    <!-- INSERT 문 -->
 	    INSERT INTO co_option.request_MST
 	    <trim prefix="(" suffix=")" suffixOverrides=",">
-	        <if test="requestSeq != null">REQUEST_SEQ,</if>\
+	        <if test="requestSeq != null">REQUEST_SEQ,</if>
+			<if test="eventSeq != null">EVENT_SEQ,</if>
 	        <if test="requestNm != null">REQUEST_NM,</if>
 	        <if test="requestDesc != null">REQUEST_DESC,</if>
 			<if test="requestType != null">REQUEST_TYPE,</if>
@@ -41,9 +42,10 @@
 	    </trim>
 	
 	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-	        <if test="requestSeq != null">#{requestSeq},</if>
-	        <if test="requestNm != null">#{requestNm},</if>
-	        <if test="requestDesc != null">#{requestDesc},</if>
+	        <if test="eventSeq != null">#{eventSeq},</if>
+			<if test="eventSeq != null">#{eventSeq},</if>
+	        <if test="eventNm != null">#{eventNm},</if>
+	        <if test="eventDesc != null">#{eventDesc},</if>
 			<if test="requestType != null">#{requestType},</if>
 	        'N',
 	        'N',
