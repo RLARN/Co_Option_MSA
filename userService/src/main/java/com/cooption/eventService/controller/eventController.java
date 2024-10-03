@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooption.eventService.service.EventService;
 import com.cooption.eventService.vo.EventVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/coOption")
 public class eventController {
 
     @Autowired
@@ -50,4 +48,9 @@ public class eventController {
     	
     }
 
+    @PostMapping("/addEventUserRel")
+    public void addEventUserRel(EventVO eventVO) throws GeneralSecurityException, IOException{
+    	eventService.addEventUserRel(eventVO);
+    }
+    
 }

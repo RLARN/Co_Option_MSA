@@ -22,4 +22,8 @@ public interface RequestMapper {
     
     // 일정 요청 프로세스
     int insertEventRequestRel(RequestVO requestVO);
+    
+    void requestEventApproval(RequestVO requestVO);
+    
+    void requestEventReject(RequestVO requestVO);
 }

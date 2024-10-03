@@ -125,4 +125,13 @@ public class EventService {
             throw new RuntimeException("create user fail");
         }
     }
+    
+    // 일정 승인 프로세스
+    public void addEventUserRel(EventVO eventVO) {
+    	int check = eventMapper.insertEventUserRel(eventVO);
+    	
+    	if (check == 0) {
+	        throw new RuntimeException("create event user rel fail");
+	    }
+    }
 }
