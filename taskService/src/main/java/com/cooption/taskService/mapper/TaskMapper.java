@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TaskMapper {
 
     int insertTask(TaskVO taskVO);
+
+    void modifyTask(TaskVO taskVO);
 }

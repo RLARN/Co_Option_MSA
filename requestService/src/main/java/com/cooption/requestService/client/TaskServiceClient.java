@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface TaskServiceClient {
 
     @PostMapping("/coOption/addTask")  // task 등록
-    void createTask(@RequestBody TaskVO taskVO);
+    int createTask(@RequestBody TaskVO taskVO);
 
-    @PutMapping("/coOption/modifyTask")  // task 수정 (승인 또는 거절)
+    @PostMapping ("/coOption/modifyTask")  // task 수정 (승인 또는 거절)
     void modifyTask(@RequestBody TaskVO taskVO);
 }

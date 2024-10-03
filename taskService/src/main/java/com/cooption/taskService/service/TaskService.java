@@ -23,7 +23,7 @@ public class TaskService {
     @Autowired
     private TaskMapper taskMapper;
 
-    public void insertTask(TaskVO taskVO) {
+    public int insertTask(TaskVO taskVO) {
 
     	// 1 == create success、0 == create fail
     	int check = 0;
@@ -39,7 +39,7 @@ public class TaskService {
         taskVO.setTaskType(taskVO.getTaskType());
         taskVO.setDeleteYn(taskVO.getDeleteYn());*/
 
-		taskVO.setTaskNm("기술고문 고문");
+		taskVO.setTaskNm("chamchi");
 		taskVO.setTaskDesc("kimcmiMaster");
 		taskVO.setTaskDate(null);
 		taskVO.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
@@ -55,16 +55,13 @@ public class TaskService {
 	        throw new RuntimeException("create user fail");
 	    }
 
-		int eventSeq = taskVO.getEventSeq();
-	    System.out.println("Generated eventSeq: " + eventSeq);
-
+		int taskSeq = taskVO.getTaskSeq();
+	    System.out.println("Generated taskSeq: " + taskSeq);
+		return taskSeq;
 	    //check = taskMapper.insertEventUserRel(taskVO);
 
-		if (check == 0) {
-            throw new RuntimeException("create user fail");
-        }
     }
 	public void modifyTask(TaskVO taskVO) {
-
+		taskMapper.modifyTask(taskVO);
 	}
 }

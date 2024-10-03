@@ -63,6 +63,21 @@
 	    </trim>
 	</insert>
 
+
+	<update id="modifyTask" parameterType="com.cooption.taskService.vo.TaskVO">
+		UPDATE co_option.TASK_MST
+		<set>
+			<if test="taskNm != null">TASK_NM = #{taskNm},</if>
+			<if test="taskType != null">TASK_TYPE = #{taskType},</if>
+			<if test="completeYn != null">COMPLETE_YN = #{completeYn},</if>
+			<if test="approvedYn!= null">APPROVED_YN = #{approvedYn},</if>
+			<if test="deleteYn != null">DELETE_YN = #{deleteYn},</if>
+			UPD_DT = NOW(),
+			<if test="updId != null">UPD_ID = #{updId},</if>
+		</set>
+		WHERE TASK_SEQ = #{taskSeq}
+	</update>
+
 <!--	<insert id="insertEventUserRel" parameterType="com.cooption.taskService.vo.TaskVO">
 		INSERT INTO co_option.event_user_rel (EVENT_SEQ,USER_SEQ) VALUES(#{eventSeq},#{userSeq})
 	</insert>-->
