@@ -43,9 +43,22 @@ public class eventController {
         }
     	
     	System.out.println("eventVO : " + eventVO);
-    	
-    	
-    	
+    }
+
+    @PostMapping("/updateEvent")
+    public void updateEvent(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        EventVO eventVO = new EventVO();
+
+        try {
+            eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+            // 일정 수정
+            eventService.updateEvent(eventVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     }
 
     @PostMapping("/addEventUserRel")

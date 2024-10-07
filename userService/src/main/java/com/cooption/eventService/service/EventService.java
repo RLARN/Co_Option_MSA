@@ -125,7 +125,32 @@ public class EventService {
             throw new RuntimeException("create user fail");
         }
     }
-    
+    public void updateEvent(EventVO eventVO) throws IOException, GeneralSecurityException {
+        InputStream oriJson = new ClassPathResource(eventCommon.GOOGLE_COMM_CD_IS_SA).getInputStream();
+        GoogleCredential credential = GoogleCredential.fromStream(oriJson)
+                .createScoped(Arrays.asList(CalendarScopes.CALENDAR))
+                .createDelegated(eventCommon.GOOGLE_COMM_CD_IS_GOOGLE_ID);
+
+        NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
+        Calendar service = new Calendar.Builder(transport, JacksonFactory.getDefaultInstance(), credential)
+                .setApplicationName("app 이름")
+                .build();
+
+        String calendarId = eventCommon.GOOGLE_COMM_CD_IS_CALENDAR_ID;
+        Event event = service.events().get(calendarId, eventVO.getEid()).execute();
+
+        event.setSummary(eventVO.getSummary())
+                .setDescription(eventVO.getDescription())
+                .setStart(new EventDateTime()
+                        .setDateTime(new DateTime(eventVO.getEventStartDate()))
+                        .setTimeZone("Asia/Seoul"))
+                .setEnd(new EventDateTime()
+                        .setDateTime(new DateTime(eventVO.getEventEndDate()))
+                        .setTimeZone("Asia/Seoul"));
+
+        service.events().update(calendarId, eventVO.getEid(), event).execute();
+        System.out.printf("Event updated: %s\n", event.getHtmlLink());
+    }
     // 일정 승인 프로세스
     public void addEventUserRel(EventVO eventVO) {
     	int check = eventMapper.insertEventUserRel(eventVO);
