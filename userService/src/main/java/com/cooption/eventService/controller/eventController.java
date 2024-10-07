@@ -59,6 +59,19 @@ public class eventController {
             e.printStackTrace();
         }
     }
+    @PostMapping("/deleteEvent")
+    public void deleteEvent(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        EventVO eventVO = new EventVO();
+
+        try {
+            eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+            // 일정 수정
+            eventService.deleteEvent(eventVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PostMapping("/addEventUserRel")
