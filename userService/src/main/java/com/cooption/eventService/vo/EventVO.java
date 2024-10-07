@@ -21,6 +21,16 @@ public class EventVO {
 	private String regId;
 	private Date updDt;
 	private String updId;
+
+	public String getEid() {
+		return eid;
+	}
+
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
+
+	private String eid;
 	
 	// test
 	private String summary;
