@@ -53,6 +53,7 @@ public class RequestController {
 
     		// eventseq취득하기 위해 파싱
     		eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+    		//eventVO.setEventSeq(1);
 	    	requestService.insertEventRequest(requestVO, eventVO);
 
 
@@ -110,4 +111,26 @@ public class RequestController {
 
     }
 
+    @PostMapping("/requestEventApproval")
+    //여기로 테스크 요청이 들어온다
+    public void requestEventApproval(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+        RequestVO requestVO = new RequestVO();
+        try {
+            requestService.requestEventApproval(requestVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @PostMapping("/requestEventReject")
+    //여기로 테스크 요청이 들어온다
+    public void requestEventReject(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+        RequestVO requestVO = new RequestVO();
+        try {
+            requestService.requestEventReject(requestVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

@@ -49,7 +49,7 @@ public class eventController {
     }
 
     @PostMapping("/addEventUserRel")
-    public void addEventUserRel(EventVO eventVO) throws GeneralSecurityException, IOException{
+    public void addEventUserRel(@RequestBody EventVO eventVO) throws GeneralSecurityException, IOException{
     	eventService.addEventUserRel(eventVO);
     }
     

@@ -1,6 +1,7 @@
 package com.cooption.requestService.service;
 
 
+import com.cooption.requestService.client.EventServiceClient;
 import com.cooption.requestService.client.TaskServiceClient;
 import com.cooption.requestService.vo.EventVO;
 import com.cooption.requestService.vo.RequestVO;
@@ -20,6 +21,9 @@ public class RequestService {
 
 	@Autowired
 	private TaskServiceClient taskServiceClient;  // Feign Client 주입
+	
+	@Autowired
+	private EventServiceClient eventServiceClient;  // Feign Client 주입
 
 	public void insertTaskRequest(RequestVO requestVO) {
 
@@ -106,18 +110,53 @@ public class RequestService {
 	
 	
 	
+	
 	// 일정 요청 프로세스
 	
 	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
 
 		requestVO.setEventSeq(eventVO.getEventSeq());
+		requestVO.setRequestNm("123");//가데이터
+		requestVO.setUserSeq(10);
 		
 		requestMapper.insertRequest(requestVO);//request MST 등록
+		
+		int requestSeq = requestVO.getRequestSeq();
+		requestVO.setRequestSeq(requestSeq);
+		
 		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
+		
+		// userseq리스트로 받아서 등록
 		requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
 
     }
 	
+	
+	/*
+	 * 일정 승인 프로세스 (REQUEST_USER_REL 승인으로 수정, EVENT_USER_REL 해당 유저 등록)
+	 */
+	public void requestEventApproval(RequestVO requestVO){
+		
+		EventVO eventVO = new EventVO();
+		eventVO.setEventSeq(1);
+		eventVO.setUserSeq(10);
+
+		requestVO.setUserSeq(10);
+		requestVO.setRequestSeq(10);
+		
+		System.out.println("requestVOrequestVOrequestVO : " + requestVO.getEventSeq() + " : " + requestVO.getRequestSeq());
+		
+		requestMapper.requestEventApproval(requestVO);
+		eventServiceClient.addEventUserRel(eventVO);
+	}
+	
+	
+	public void requestEventReject(RequestVO requestVO){
+		requestVO.setUserSeq(10);
+		requestVO.setRequestSeq(10);
+		requestMapper.requestEventReject(requestVO);
+		
+	}
 	
 	
 	
