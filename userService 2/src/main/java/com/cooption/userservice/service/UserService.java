@@ -52,13 +52,10 @@ public class UserService {
     }
 	
 	// select all users
-	public void selectUserList(UserVO userVO) {
+	public List<UserVO> selectUserList(UserVO userVO) {
 		
 		List<UserVO> userList = userMapper.selectUserList(userVO);
-		/*
-		for(UserVO vo : userList) {
-			System.out.println(vo);
-		}
-		*/
+		return userList;
+
 	}
 }

@@ -3,14 +3,10 @@ package com.cooption.userservice.controller;
 import com.cooption.userservice.service.UserService;
 import com.cooption.userservice.vo.UserVO;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/coOption")
 public class UserController {
 
     @Autowired
@@ -38,15 +36,16 @@ public class UserController {
     	
     }
 
-    // DB select
     @GetMapping("/selectUserList")
-    public void selectUserList() {
-    	
-    	
-    	userService.selectUserList(null);
-    	
+    @ResponseBody
+    public List<UserVO> selectUserList() throws GeneralSecurityException, IOException {
+
+        //ObjectMapper mapper = new ObjectMapper();
+        UserVO userVO = new UserVO();//mapper.readValue(userInfoJson, UserVO.class);
+
+        List<UserVO> userList = userService.selectUserList(userVO);
+        return userList;
     }
-    
 
     /*
     // DELETE 予定 참고용

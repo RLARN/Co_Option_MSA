@@ -54,14 +54,12 @@
 	</insert>
 
 	<select id="selectUserList" parameterType="com.cooption.userservice.vo.UserVO" resultMap="UserBaseInfo">
-	
 		SELECT 
 			USER_SEQ, USER_ID, USER_PWD,
 			USER_NAME, USER_MAIL, DELETE_YN,
 			REG_DT, REG_ID, UPD_DT, UPD_ID	
 		FROM
 			co_option.USER_MST
-		
 	</select>
 
 	
