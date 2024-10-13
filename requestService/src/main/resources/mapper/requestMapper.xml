@@ -144,4 +144,17 @@
 		WHERE REQUEST_SEQ = #{requestSeq}
 		AND USER_SEQ = #{userSeq}
 	</update>
+
+	<select id="selectRequestList" parameterType="com.cooption.requestService.vo.RequestVO" resultMap="requestBaseInfo">
+		SELECT
+			rm.REQUEST_SEQ, rm.REQUEST_NM, rm.REQUEST_DESC, rm.REQUEST_TYPE, rm.REQUEST_SENDER_ID, rm.COMPLETE_YN, rm.DELETE_YN, rm.REG_DT, rm.REG_ID, rm.UPD_DT, rm.UPD_ID
+		FROM
+			co_option.request_user_rel rel
+				JOIN
+			co_option.request_mst rm ON rel.REQUEST_SEQ = rm.REQUEST_SEQ
+				JOIN
+			co_option.user_mst um ON rel.USER_SEQ = um.USER_SEQ
+		WHERE
+			um.USER_ID = #{userId}
+	</select>
 </mapper>

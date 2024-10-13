@@ -26,7 +26,7 @@ public class UserService {
 	*/
 	public void createUser(UserVO userVO) {
 		
-		// test obj
+/*		// test obj
 		UserVO userVO2 = new UserVO();
 		
 		userVO2.setUpdId("hammer");
@@ -39,9 +39,9 @@ public class UserService {
 		userVO2.setRegId("hammer");
 		//userVO2.setUpdDt(null);		//sql now
 		userVO2.setUpdId("hammer");
-		
+		*/
 		// 後にuserVO2 -> userVO修正必要
-		int check = userMapper.createUser(userVO2);
+		int check = userMapper.createUser(userVO);
         
 		// 1 == create success、0 == create fail
 		System.out.println("check : " + check);

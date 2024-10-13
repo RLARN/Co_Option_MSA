@@ -2,6 +2,7 @@ package com.cooption.requestService.controller;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
 import com.cooption.requestService.vo.EventVO;
 import com.cooption.requestService.vo.RequestVO;
@@ -131,6 +132,16 @@ public class RequestController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @GetMapping("/selectRequestList")
+    @ResponseBody
+    public List<RequestVO> selectUserList(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        RequestVO requestVO = mapper.readValue(eventInfoJson, RequestVO.class);
+        List<RequestVO> requestVOListList = requestService.selectRequestList(requestVO);
+        return requestVOListList;
     }
     
 }

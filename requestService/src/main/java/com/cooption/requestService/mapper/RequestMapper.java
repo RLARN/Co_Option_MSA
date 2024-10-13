@@ -4,6 +4,8 @@ package com.cooption.requestService.mapper;
 import com.cooption.requestService.vo.RequestVO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 @Mapper
 public interface RequestMapper {
@@ -26,4 +28,6 @@ public interface RequestMapper {
     void requestEventApproval(RequestVO requestVO);
     
     void requestEventReject(RequestVO requestVO);
+
+    List<RequestVO> selectReuestList(RequestVO requestVO);
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.cooption.requestService.common.RequestCommon;
 import com.cooption.requestService.mapper.RequestMapper;
 
+import java.util.List;
+
 
 @Service
 public class RequestService {
@@ -157,8 +159,10 @@ public class RequestService {
 		requestMapper.requestEventReject(requestVO);
 		
 	}
-	
-	
-	
-	
+
+
+    public List<RequestVO> selectRequestList(RequestVO requestVO) {
+		List<RequestVO> requestVOList = requestMapper.selectReuestList(requestVO);
+		return requestVOList;
+    }
 }

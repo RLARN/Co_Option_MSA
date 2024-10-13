@@ -28,11 +28,12 @@ public class UserController {
     
     
     // DB insert
-    @GetMapping("/createUser")
-    public void createUser() {
-    	
-    	
-    	userService.createUser(null);
+    @PostMapping("/createUser")
+    public void createUser(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        UserVO userVO = mapper.readValue(eventInfoJson, UserVO.class);
+    	userService.createUser(userVO);
     	
     }
 

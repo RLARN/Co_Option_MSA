@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import com.cooption.taskService.vo.TaskVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,10 @@ public class TaskService {
     }
 	public void modifyTask(TaskVO taskVO) {
 		taskMapper.modifyTask(taskVO);
+	}
+
+	public List<TaskVO> selectTaskList(TaskVO requestVO) {
+		List<TaskVO> taskList = taskMapper.selectTaskList(requestVO);
+		return taskList;
 	}
 }
