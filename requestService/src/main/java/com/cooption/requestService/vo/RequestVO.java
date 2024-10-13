@@ -19,6 +19,8 @@ public class RequestVO {
     private int taskSeq;
     private String userAppYn;
 
+	private String userId;//수신자.
+
     private Date regDt;
     private String regId;
     private Date updDt;

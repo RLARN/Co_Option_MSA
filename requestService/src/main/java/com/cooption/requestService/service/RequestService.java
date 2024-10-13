@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.cooption.requestService.common.RequestCommon;
 import com.cooption.requestService.mapper.RequestMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -162,7 +163,9 @@ public class RequestService {
 
 
     public List<RequestVO> selectRequestList(RequestVO requestVO) {
-		List<RequestVO> requestVOList = requestMapper.selectReuestList(requestVO);
+		List<RequestVO> requestVOList = new ArrayList<RequestVO>();
+		requestVOList = requestMapper.selectRequestList(requestVO);
+
 		return requestVOList;
     }
 }

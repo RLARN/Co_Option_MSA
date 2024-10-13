@@ -66,8 +66,8 @@ public class TaskService {
 		taskMapper.modifyTask(taskVO);
 	}
 
-	public List<TaskVO> selectTaskList(TaskVO requestVO) {
-		List<TaskVO> taskList = taskMapper.selectTaskList(requestVO);
+	public List<TaskVO> selectTaskList(TaskVO taskVO) {
+		List<TaskVO> taskList = taskMapper.selectTaskList(taskVO);
 		return taskList;
 	}
 }

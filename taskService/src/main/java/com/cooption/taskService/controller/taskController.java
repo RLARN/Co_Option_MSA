@@ -58,7 +58,7 @@ public class taskController {
 
     }
 
-    @GetMapping("/selectTaskList")
+    @PostMapping("/selectTaskList")
     @ResponseBody
     public List<TaskVO> selectTaskList(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
 

@@ -78,11 +78,11 @@
 		WHERE TASK_SEQ = #{taskSeq}
 	</update>
 
-	<select id="selectTaskList" parameterType="com.cooption.taskService.vo.TaskVO" resultMap="requestBaseInfo">
+	<select id="selectTaskList" parameterType="com.cooption.taskService.vo.TaskVO" resultMap="TaskBaseInfo">
 		SELECT TASK_SEQ, EVENT_SEQ, TASK_NM, TASK_DESC, TASK_DATE, COMPLETE_YN, TASK_TYPE, APPROVED_YN, DELETE_YN, REG_DT, REG_ID, UPD_DT, UPD_ID
 		FROM co_option.task_mst
 		WHERE
-			eventSeq = #{eventSeq}
+			EVENT_SEQ = #{eventSeq}
 	</select>
 
 </mapper>

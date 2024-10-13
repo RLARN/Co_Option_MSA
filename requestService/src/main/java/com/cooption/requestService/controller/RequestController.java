@@ -134,7 +134,7 @@ public class RequestController {
         }
     }
 
-    @GetMapping("/selectRequestList")
+    @PostMapping("/selectRequestList")
     @ResponseBody
     public List<RequestVO> selectUserList(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         ObjectMapper mapper = new ObjectMapper();

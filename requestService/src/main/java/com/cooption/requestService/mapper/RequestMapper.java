@@ -29,5 +29,5 @@ public interface RequestMapper {
     
     void requestEventReject(RequestVO requestVO);
 
-    List<RequestVO> selectReuestList(RequestVO requestVO);
+    List<RequestVO> selectRequestList(RequestVO requestVO);
 }
