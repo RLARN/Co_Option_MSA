@@ -6,9 +6,9 @@ spring:
     name: eventService
 
   datasource:
-    url: jdbc:mariadb://192.168.0.4:3306/co_option
-    username: hammer
-    password: hammer
+    url: jdbc:mariadb://121.111.164.3:3306/co_option
+    username: hanma
+    password: hanma
     driver-class-name: org.mariadb.jdbc.Driver
     mapper-locations: classpath:mapper/*.xml
 
