@@ -55,18 +55,18 @@ public class EventService {
 
         // 새로운 이벤트 객체를 생성하고, 이벤트의 제목과 설명을 설정
         Event event = new Event()
-                .setSummary("test")  // 이벤트 제목
-                .setDescription("teststst");  // 이벤트 설명
+                .setSummary(eventVO.getEventNm())  // 이벤트 제목
+                .setDescription(eventVO.getEventDesc());  // 이벤트 설명
 
         // 이벤트의 시작 날짜와 시간을 설정
-        DateTime startDateTime = new DateTime("2022-05-18T09:00:00-07:00");
+        DateTime startDateTime = new DateTime(eventVO.getEventStartDate());
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
                 .setTimeZone("Asia/Seoul");  // 시간대를 'Asia/Seoul'로 설정
         event.setStart(start);
 
         // 이벤트의 종료 날짜와 시간을 설정
-        DateTime endDateTime = new DateTime("2022-05-19T09:00:00-07:00");
+        DateTime endDateTime = new DateTime(eventVO.getEventEndDate());
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
                 .setTimeZone("Asia/Seoul");  // 시간대를 'Asia/Seoul'로 설정
