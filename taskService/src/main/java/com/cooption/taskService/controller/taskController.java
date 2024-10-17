@@ -21,11 +21,12 @@ public class taskController {
 
 
     @PostMapping("/addTask")
-    public int createTask() throws GeneralSecurityException, IOException {
+    public int createTask(@RequestBody String infoJson) throws GeneralSecurityException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
         TaskVO taskVO = new TaskVO();
+        taskVO = mapper.readValue(infoJson, TaskVO.class);
 
         // 일정 DB 등록
         return taskService.insertTask(taskVO);

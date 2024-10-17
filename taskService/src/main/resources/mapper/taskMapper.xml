@@ -51,7 +51,7 @@
 			<if test="eventSeq != null">#{eventSeq},</if>
 	        <if test="taskNm != null">#{taskNm},</if>
 	        <if test="taskDesc != null">#{taskDesc},</if>
-	        NOW(),
+			<if test="taskDate != null">#{taskDate},</if>
 			<if test="taskType != null">#{taskType},</if>
 	        'N',
 	        'N',

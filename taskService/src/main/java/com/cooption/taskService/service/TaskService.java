@@ -40,11 +40,11 @@ public class TaskService {
         taskVO.setTaskType(taskVO.getTaskType());
         taskVO.setDeleteYn(taskVO.getDeleteYn());*/
 
-		taskVO.setTaskNm("chamchi");
-		taskVO.setTaskDesc("kimcmiMaster");
-		taskVO.setTaskDate(null);
+//		taskVO.setTaskNm("chamchi");
+//		taskVO.setTaskDesc("kimcmiMaster");
+//		taskVO.setTaskDate(null);
 		taskVO.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
-		taskVO.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
+//		taskVO.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
 		taskVO.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
         taskVO.setRegId("hammer");
 		taskVO.setUpdId("hammer");
