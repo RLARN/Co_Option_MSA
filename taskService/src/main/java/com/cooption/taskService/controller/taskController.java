@@ -36,7 +36,7 @@ public class taskController {
     }
 
     @PostMapping("/modifyTask")
-    public void modifyTask(@RequestBody TaskVO taskVO) throws GeneralSecurityException, IOException {
+    public void modifyTask(@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -49,22 +49,22 @@ public class taskController {
             //taskService.createEvent(taskVO);
 
             // 일정 DB 등록
-            taskService.modifyTask(taskVO);
+            //taskService.modifyTask(taskVO);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("ApprovedYn : " + taskVO.getApprovedYn());
+        //System.out.println("ApprovedYn : " + taskVO.getApprovedYn());
         //System.out.println("eventVO : " + eventVO);
 
     }
 
     @PostMapping("/selectTaskList")
     @ResponseBody
-    public List<TaskVO> selectTaskList(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+    public List<TaskVO> selectTaskList(@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        TaskVO taskVO = mapper.readValue(eventInfoJson, TaskVO.class);
+        TaskVO taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
 
         List<TaskVO> taskList = taskService.selectTaskList(taskVO);
         return taskList;
