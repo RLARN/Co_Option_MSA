@@ -51,18 +51,35 @@ public class UserService {
         }
     }
 	
-	// select all users
+	// 유저 선택
 	public List<UserVO> selectUserList(UserVO userVO) {
-		
+
 		List<UserVO> userList = userMapper.selectUserList(userVO);
 		return userList;
 
 	}
 	
 	public UserVO isValidUser(UserVO userVO) {
-		
-		UserVO vo = userMapper.isValidUser(userVO);
 
+		UserVO vo = userMapper.isValidUser(userVO);
 		return vo;
+	}
+
+	public UserVO selectUser(UserVO userVO) {
+
+		userVO = userMapper.selectUser(userVO);
+		return userVO;
+	}
+
+	public List<UserVO> selectEventUserList(String eventSeq) {
+
+		List<UserVO> userList = userMapper.selectEventUserList(eventSeq);
+		return userList;
+	}
+
+	public List<UserVO> selectNonEventUserList(UserVO userVO) {
+
+		List<UserVO> userList = userMapper.selectNonEventUserList(userVO);
+		return userList;
 	}
 }

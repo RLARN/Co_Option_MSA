@@ -11,5 +11,13 @@ public interface UserMapper {
 
 	List<UserVO> selectUserList(UserVO userVO);
 	int createUser(UserVO userVO);
+
 	UserVO isValidUser(UserVO userVO);
+
+	UserVO selectUser(UserVO userVO);
+
+	List<UserVO> selectEventUserList(String eventSeq);
+
+	List<UserVO> selectNonEventUserList(UserVO userVO);
+
 }

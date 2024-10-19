@@ -34,25 +34,58 @@ public class UserController {
     
     // DB insert
     @PostMapping("/createUser")
-    public void createUser(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+    public void createUser(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        UserVO userVO = mapper.readValue(eventInfoJson, UserVO.class);
-        userService.createUser(userVO);
+        UserVO userVO = mapper.readValue(userInfoJson, UserVO.class);
+    	userService.createUser(userVO);
     	
     }
 
-    @GetMapping("/selectUserList")
+    @PostMapping("/selectUserList")//전체 유저리스트 출력.
     @ResponseBody
-    public List<UserVO> selectUserList() throws GeneralSecurityException, IOException {
+    public List<UserVO> selectUserList(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
 
-        //ObjectMapper mapper = new ObjectMapper();
-        UserVO userVO = new UserVO();//mapper.readValue(userInfoJson, UserVO.class);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.readValue(userInfoJson, UserVO.class);
+        UserVO userVO = new UserVO();
 
         List<UserVO> userList = userService.selectUserList(userVO);
         return userList;
     }
-    
+    @PostMapping("/selectUser")//userId 받아오면 user 전체 정보 출력
+    @ResponseBody
+    public UserVO selectUser(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        UserVO userVO = new UserVO();
+        userVO = mapper.readValue(userInfoJson, UserVO.class);
+        userVO = userService.selectUser(userVO);
+
+        return userVO;
+    }
+
+    @PostMapping("/selectEventUserList")//EventSeq 받아오면 해당 이벤트에 참가한 유저 리스트 출력
+    @ResponseBody
+    public List<UserVO> selectEventUserList(@RequestBody String eventSeq) throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        List<UserVO> userList = userService.selectEventUserList(eventSeq);
+
+        return userList;
+    }
+
+    @PostMapping("/selectNonEventUserList")//EventSeq 받아오면 해당 이벤트에 참가한 유저 리스트 출력
+    @ResponseBody
+    public List<UserVO> selectNonEventUserList(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        UserVO userVO = mapper.readValue(userInfoJson, UserVO.class);
+        List<UserVO> userList = userService.selectNonEventUserList(userVO);
+
+        return userList;
+    }
+
     /*
     // DELETE 予定 참고용
     @GetMapping("/findAll/{id}")

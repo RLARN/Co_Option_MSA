@@ -73,13 +73,40 @@
 			USER_ID = #{userId} AND
 			USER_PWD = #{userPwd}
 	</select>
-	
 
-	
-<!-- 
+	<select id="selectUser" parameterType="com.cooption.userservice.vo.UserVO" resultMap="UserBaseInfo">
+		SELECT
+			USER_SEQ, USER_ID, USER_PWD,
+			USER_NAME, USER_MAIL, DELETE_YN,
+			REG_DT, REG_ID, UPD_DT, UPD_ID
+		FROM
+			co_option.USER_MST
+		<where>
+			<if test="userId != null">
+				USER_ID = #{userId}
+			</if>
+		</where>
+	</select>
 
+	<select id="selectEventUserList" parameterType="java.lang.String" resultMap="UserBaseInfo">
+		SELECT
+			USER_SEQ, USER_ID, USER_PWD,
+			USER_NAME, USER_MAIL, DELETE_YN,
+			REG_DT, REG_ID, UPD_DT, UPD_ID
+		FROM
+			USER_MST
+		WHERE
+			USER_SEQ = (SELECT USER_SEQ FROM EVENT_USER_REL WHERE EVENT_SEQ = #{eventSeq} GROUP BY USER_SEQ)
+	</select>
 
-		<typeAlias alias="UserBaseInfo" type="com.cooption.userservice.vo.UserVO"/>
-
-	 -->
+	<select id="selectNonEventUserList" parameterType="com.cooption.userservice.vo.UserVO" resultMap="UserBaseInfo">
+		SELECT
+			USER_SEQ, USER_ID, USER_PWD,
+			USER_NAME, USER_MAIL, DELETE_YN,
+			REG_DT, REG_ID, UPD_DT, UPD_ID
+		FROM
+			co_option.USER_MST
+		WHERE
+			USER_SEQ NOT IN (SELECT USER_SEQ FROM EVENT_USER_REL WHERE EVENT_SEQ = #{eventSeq})
+	</select>
 </mapper>
