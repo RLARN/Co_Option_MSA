@@ -4,6 +4,10 @@ import com.cooption.userservice.service.UserService;
 import com.cooption.userservice.vo.UserVO;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +37,7 @@ public class UserController {
 
         ObjectMapper mapper = new ObjectMapper();
         UserVO userVO = mapper.readValue(eventInfoJson, UserVO.class);
-    	userService.createUser(userVO);
+        userService.createUser(userVO);
     	
     }
 
@@ -47,7 +51,7 @@ public class UserController {
         List<UserVO> userList = userService.selectUserList(userVO);
         return userList;
     }
-
+    
     /*
     // DELETE 予定 참고용
     @GetMapping("/findAll/{id}")

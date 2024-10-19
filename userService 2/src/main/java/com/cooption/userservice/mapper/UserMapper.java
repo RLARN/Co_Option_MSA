@@ -11,4 +11,5 @@ public interface UserMapper {
 
 	List<UserVO> selectUserList(UserVO userVO);
 	int createUser(UserVO userVO);
+	UserVO isValidUser(UserVO userVO);
 }

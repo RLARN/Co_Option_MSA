@@ -58,4 +58,11 @@ public class UserService {
 		return userList;
 
 	}
+	
+	public UserVO isValidUser(UserVO userVO) {
+		
+		UserVO vo = userMapper.isValidUser(userVO);
+
+		return vo;
+	}
 }
