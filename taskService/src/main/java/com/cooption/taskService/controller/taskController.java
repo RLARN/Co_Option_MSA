@@ -69,4 +69,13 @@ public class taskController {
         List<TaskVO> taskList = taskService.selectTaskList(taskVO);
         return taskList;
     }
+    
+    @PostMapping("/completeYNChange")
+    public void completeYNChange(@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        TaskVO taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
+
+        taskService.completeYNChange(taskVO);
+    }
 }

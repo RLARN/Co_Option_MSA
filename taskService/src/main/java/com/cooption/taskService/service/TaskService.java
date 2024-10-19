@@ -70,4 +70,8 @@ public class TaskService {
 		List<TaskVO> taskList = taskMapper.selectTaskList(taskVO);
 		return taskList;
 	}
+	
+	public void completeYNChange(TaskVO taskVO) {
+		taskMapper.completeYNChange(taskVO);
+	}
 }

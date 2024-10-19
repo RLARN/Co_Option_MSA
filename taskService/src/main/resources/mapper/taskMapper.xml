@@ -84,5 +84,13 @@
 		WHERE
 			EVENT_SEQ = #{eventSeq}
 	</select>
+	
+	<update id="completeYNChange" parameterType="com.cooption.taskService.vo.TaskVO">
+		UPDATE co_option.TASK_MST
+		<set>
+			<if test="completeYn != null">COMPLETE_YN = #{completeYn},</if>
+		</set>
+		WHERE TASK_SEQ = #{taskSeq}
+	</update>
 
 </mapper>

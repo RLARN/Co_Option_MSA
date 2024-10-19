@@ -15,4 +15,6 @@ public interface TaskMapper {
     void modifyTask(TaskVO taskVO);
 
     List<TaskVO> selectTaskList(TaskVO requestVO);
+    
+    void completeYNChange(TaskVO taskVO);
 }
