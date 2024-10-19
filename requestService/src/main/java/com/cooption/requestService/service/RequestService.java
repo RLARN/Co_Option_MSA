@@ -99,28 +99,13 @@ public class RequestService {
 	public void modifyUserRequestRel(RequestVO requestVO){
 		requestMapper.modifyUserRequestRel(requestVO);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// 일정 요청 프로세스
-	
 	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
 
-		requestVO.setEventSeq(eventVO.getEventSeq());
-		requestVO.setRequestNm("123");//가데이터
-		requestVO.setUserSeq(10);
+		//requestVO.setEventSeq(eventVO.getEventSeq());
+		//requestVO.setRequestNm("123");//가데이터
+		//requestVO.setUserSeq(10);
 		
 		requestMapper.insertRequest(requestVO);//request MST 등록
 		
@@ -130,7 +115,7 @@ public class RequestService {
 		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
 		
 		// userseq리스트로 받아서 등록
-		requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
+		requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록`
 
     }
 	

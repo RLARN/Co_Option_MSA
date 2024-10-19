@@ -3,6 +3,7 @@ package com.cooption.requestService.controller;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.Map;
 
 import com.cooption.requestService.vo.EventVO;
 import com.cooption.requestService.vo.RequestVO;
@@ -43,7 +44,7 @@ public class RequestController {
     }
     
     @PostMapping("/addEventRequest")
-    //여기로 테스크 요청이 들어온다
+    //일정참가 요청
     public void addEventRequest(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
 
     	ObjectMapper mapper = new ObjectMapper();
@@ -52,8 +53,15 @@ public class RequestController {
     	
     	try {
 
+            //이벤트 아이디 보낼꺼고
+            //유저 정보를 배열로 보낼꺼다.
+            //요청 Desc 보낼꺼다.
+
     		// eventseq취득하기 위해 파싱
-    		eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+            //List<Map<String, String>> userVO();
+            List<Map<String, String>> chuga;
+    		//eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+            //chuga = mapper.readValue(eventInfoJson, EventVO.class);
     		//eventVO.setEventSeq(1);
 	    	requestService.insertEventRequest(requestVO, eventVO);
 
@@ -67,7 +75,7 @@ public class RequestController {
     }
 
     @PostMapping("/requestTaskApproval")
-    //여기로 테스크 요청이 들어온다
+    //task 요청 승인
     public void requestTaskApproval() throws GeneralSecurityException, IOException {
 
         //ObjectMapper mapper = new ObjectMapper();
@@ -90,7 +98,7 @@ public class RequestController {
     }
 
     @PostMapping("/requestTaskReject")
-    //여기로 테스크 요청이 들어온다
+    //task 요청 거절
     public void requestTaskReject() throws GeneralSecurityException, IOException {
 
         //ObjectMapper mapper = new ObjectMapper();
@@ -113,7 +121,7 @@ public class RequestController {
     }
 
     @PostMapping("/requestEventApproval")
-    //여기로 테스크 요청이 들어온다
+    //이벤트 요청 승인
     public void requestEventApproval(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         RequestVO requestVO = new RequestVO();
         try {
@@ -124,7 +132,7 @@ public class RequestController {
     }
     
     @PostMapping("/requestEventReject")
-    //여기로 테스크 요청이 들어온다
+    //이벤트 요청 거절
     public void requestEventReject(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         RequestVO requestVO = new RequestVO();
         try {
@@ -136,6 +144,7 @@ public class RequestController {
 
     @PostMapping("/selectRequestList")
     @ResponseBody
+    //요청 리스트 출럭
     public List<RequestVO> selectUserList(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         ObjectMapper mapper = new ObjectMapper();
 
