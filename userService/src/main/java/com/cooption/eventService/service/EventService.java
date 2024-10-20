@@ -96,17 +96,17 @@ public class EventService {
     	
     	
 
-		eventVO.setEventNm(eventVO.getSummary());
-		eventVO.setEventDesc(eventVO.getDescription());
-		eventVO.setEventStartDate(eventVO.getStart());
-		eventVO.setEventEndDate(eventVO.getEnd());
+		//eventVO.setEventNm(eventVO.getSummary());
+		//eventVO.setEventDesc(eventVO.getDescription());
+		//eventVO.setEventStartDate(eventVO.getStart());
+		//eventVO.setEventEndDate(eventVO.getEnd());
 		//eventVO2.setCompleteYn("N");
 		//eventVO2.setDeleteYn("N");
 		//eventVO2.setRegDt(null); sql now
-		eventVO.setRegId("hammer");
+		//eventVO.setRegId("hammer");
 		//eventVO2.setUpdDt(null); sql now
-		eventVO.setUpdId("hammer");
-		eventVO.setUserSeq(10);
+		//eventVO.setUpdId("hammer");
+		//eventVO.setUserSeq(10);
 		
 		
 		
