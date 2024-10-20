@@ -18,6 +18,7 @@ public class UserVO {
 	private Date updDt;
 	private String updId;
 	private int eventSeq;
+	private String eid;
 
 	public int getUserSeq() {
 		return userSeq;

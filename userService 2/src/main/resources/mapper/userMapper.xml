@@ -14,6 +14,7 @@
 	    <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
 	    <result property="updDt" column="UPD_DT" jdbcType="DATE" />
 	    <result property="updId" column="UPD_ID" jdbcType="VARCHAR" />
+		<result property="eid" column="EVENT_EID" jdbcType="VARCHAR" />
 	</resultMap>
 
 
@@ -107,6 +108,17 @@
 		FROM
 			co_option.USER_MST
 		WHERE
-			USER_SEQ NOT IN (SELECT USER_SEQ FROM EVENT_USER_REL WHERE EVENT_SEQ = #{eventSeq})
+			USER_SEQ NOT IN (
+				SELECT
+				    USER_SEQ
+				FROM
+				    EVENT_USER_REL EUR
+				INNER JOIN
+				    EVENT_MST EM
+				ON
+				    EM.EVENT_SEQ = EUR.EVENT_SEQ
+				WHERE
+				    EM.EVENT_EID = #{eid}
+			)
 	</select>
 </mapper>
