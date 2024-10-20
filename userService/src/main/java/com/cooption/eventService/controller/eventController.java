@@ -98,7 +98,7 @@ public class eventController {
     	return eventVO;
     }
     
-    @PostMapping("/getEventUser")
+    @PostMapping("/getEventUser")//참가된 사람들
     public List<UserVO> getEventUser(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException{
     	ObjectMapper mapper = new ObjectMapper();
     	List<UserVO> userlist = new ArrayList<UserVO>();

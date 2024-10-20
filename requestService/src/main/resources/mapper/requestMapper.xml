@@ -28,31 +28,31 @@
 	
 	    <!-- INSERT 문 -->
 	    INSERT INTO co_option.REQUEST_MST
-	    <trim prefix="(" suffix=")" suffixOverrides=",">
-	        <if test="requestSeq != null">REQUEST_SEQ,</if>
-	        <if test="requestNm != null">REQUEST_NM,</if>
-	        <if test="requestDesc != null">REQUEST_DESC,</if>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="requestSeq != null">REQUEST_SEQ,</if>
+			<if test="requestNm != null">REQUEST_NM,</if>
+			<if test="requestDesc != null">REQUEST_DESC,</if>
 			<if test="requestType != null">REQUEST_TYPE,</if>
-	        COMPLETE_YN,
-	        DELETE_YN,
-	        REG_DT,
-	        <if test="regId != null">REG_ID,</if>
-	        UPD_DT,
-	        <if test="updId != null">UPD_ID,</if>
-	    </trim>
-	
-	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-	        <if test="requestSeq != null">#{requestSeq},</if>
-	        <if test="requestNm != null">#{requestNm},</if>
-	        <if test="requestDesc != null">#{requestDesc},</if>
+			COMPLETE_YN,
+			DELETE_YN,
+			REG_DT,
+			<if test="regId != null">REG_ID,</if>
+			UPD_DT,
+			<if test="updId != null">UPD_ID,</if>
+		</trim>
+
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="requestSeq != null">#{requestSeq},</if>
+			<if test="requestNm != null">#{requestNm},</if>
+			<if test="requestDesc != null">#{requestDesc},</if>
 			<if test="requestType != null">#{requestType},</if>
-	        'N',
-	        'N',
-	        NOW(),
-	        <if test="regId != null">#{regId},</if>
-	        NOW(),
-	        <if test="updId != null">#{updId},</if>
-	    </trim>
+			'N',
+			'N',
+			NOW(),
+			<if test="regId != null">#{regId},</if>
+			NOW(),
+			<if test="updId != null">#{updId},</if>
+		</trim>
 	</insert>
 
 <!--	<insert id="insertEventUserRel" parameterType="com.cooption.requestService.vo.RequestVO">
@@ -96,7 +96,7 @@
 		VALUES
 		<foreach collection="arrUserSeq" item="userSeq" separator=",">
 			(
-				#{requestSeq}
+				#{requestSeq},
 				#{userSeq},
 				#{userAppYn}
 			)

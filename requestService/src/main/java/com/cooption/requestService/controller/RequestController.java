@@ -45,12 +45,12 @@ public class RequestController {
 
     	ObjectMapper mapper = new ObjectMapper();
     	RequestVO requestVO = new RequestVO();
-    	EventVO eventVO = new EventVO();
+    	//EventVO eventVO = new EventVO();
     	
     	try {
 
             requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
-	    	requestService.insertEventRequest(requestVO, eventVO);
+	    	requestService.insertEventRequest(requestVO);
 
         } catch (Exception e) {
             e.printStackTrace();
