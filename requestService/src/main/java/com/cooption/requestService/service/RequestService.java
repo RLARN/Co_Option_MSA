@@ -30,6 +30,7 @@ public class RequestService {
 
 	public void insertTaskRequest(RequestVO requestVO) {
 
+		//TASK 요청프로세스
 		TaskVO taskVO = new TaskVO();
 		taskVO.setApprovedYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_N);//요청 미승인 상태
 
@@ -90,26 +91,23 @@ public class RequestService {
 		requestMapper.modifyUserRequestRel(requestVO);
 	}
 
-	// 일정 요청 프로세스
 	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
 
+		//일정 등록 프로세스
 		int requestSeq = requestMapper.insertRequest(requestVO);//request MST 등록
 		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
 		requestMapper.insertUserRequestRel(requestVO);//user[] - request 유저 관계 테이블 등록
 
     }
-	
-	
-	/*
-	 * 일정 승인 프로세스 (REQUEST_USER_REL 승인으로 수정, EVENT_USER_REL 해당 유저 등록)
-	 */
+
 	public void requestEventApproval(RequestVO requestVO){
-		
+
+		//일정 승인 프로세스 (REQUEST_USER_REL 승인으로 수정, EVENT_USER_REL 해당 유저 등록)
 		EventVO eventVO = new EventVO();
 		eventVO.setEventSeq(requestVO.getEventSeq());
 		eventVO.setUserSeq(requestVO.getUserSeq());
 		
-		System.out.println("requestVOrequestVOrequestVO : " + requestVO.getEventSeq() + " : " + requestVO.getRequestSeq());
+		System.out.println("EventSeq : " + requestVO.getEventSeq() + " //  RequestSeq  : " + requestVO.getRequestSeq());
 		
 		requestMapper.requestEventApproval(requestVO);
 		eventServiceClient.addEventUserRel(eventVO);
