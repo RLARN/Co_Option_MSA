@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cooption.eventService.service.EventService;
 import com.cooption.eventService.vo.EventVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.services.calendar.model.Event;
 
 @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 @RestController
@@ -33,11 +34,12 @@ public class eventController {
             eventVO = mapper.readValue(eventInfoJson, EventVO.class);
             
             // 일정 생성
-	    	eventService.createEvent(eventVO);
-	
+	    	Event event = eventService.createEvent(eventVO);	    	
+	    	eventVO.setEid(event.getHtmlLink().split("=")[1]);
+	    	
 	    	// 일정 DB 등록
 	    	eventService.insertEvent(eventVO);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,4 +81,18 @@ public class eventController {
     	eventService.addEventUserRel(eventVO);
     }
     
+    @PostMapping("/getEventSeq")
+    public EventVO getEventSeq(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException{
+    	ObjectMapper mapper = new ObjectMapper();
+        EventVO eventVO = new EventVO();
+
+        try {
+            eventVO = mapper.readValue(eventInfoJson, EventVO.class);
+            // 일정 수정
+            eventService.getEventSeq(eventVO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    	return null;
+    }
 }

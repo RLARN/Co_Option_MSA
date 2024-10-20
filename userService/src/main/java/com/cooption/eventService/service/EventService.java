@@ -30,7 +30,7 @@ public class EventService {
 	@Autowired
 	private EventMapper eventMapper;
 	
-    public void createEvent(EventVO eventVO) throws IOException, GeneralSecurityException {
+    public Event createEvent(EventVO eventVO) throws IOException, GeneralSecurityException {
 
         // Google 계정 인증 정보를 읽어오기 위한 입력 스트림을 생성
         InputStream oriJson = new ClassPathResource(eventCommon.GOOGLE_COMM_CD_IS_SA).getInputStream();
@@ -80,6 +80,8 @@ public class EventService {
 
         // 공백 줄을 출력 (디버깅 또는 보기 편하게)
         System.out.println("");
+        
+        return event;
     }
 
     public void insertEvent(EventVO eventVO) {
@@ -175,4 +177,10 @@ public class EventService {
 	        throw new RuntimeException("create event user rel fail");
 	    }
     }
+    
+    public EventVO getEventSeq(EventVO eventVO) {
+    	
+    	return null;
+    }
+    
 }

@@ -15,6 +15,7 @@
         <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
         <result property="updDt" column="UPD_DT" jdbcType="DATE" />
         <result property="updId" column="UPD_ID" jdbcType="VARCHAR" />
+        <result property="eid" column="EVENT_EID" jdbcType="VARCHAR" />
     </resultMap>
 
 
@@ -40,6 +41,7 @@
 	        <if test="regId != null">REG_ID,</if>
 	        UPD_DT,
 	        <if test="updId != null">UPD_ID,</if>
+	        <if test="eid != null">EVENT_EID</if>
 	    </trim>
 	
 	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -54,6 +56,7 @@
 	        <if test="regId != null">#{regId},</if>
 	        NOW(),
 	        <if test="updId != null">#{updId},</if>
+	        <if test="eid != null">#{eid},</if>
 	    </trim>
 	</insert>
 
