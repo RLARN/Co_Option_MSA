@@ -26,14 +26,11 @@ public class RequestController {
     public void createTask() throws GeneralSecurityException, IOException {
 
     	//ObjectMapper mapper = new ObjectMapper();
-
     	RequestVO requestVO = new RequestVO();
 
     	try {
-
             // task 등록
 	    	requestService.insertTaskRequest(requestVO);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +54,6 @@ public class RequestController {
             //유저 정보를 배열로 보낼꺼다.
             //요청 Desc 보낼꺼다.
 
-    		// eventseq취득하기 위해 파싱
             requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
 	    	requestService.insertEventRequest(requestVO, eventVO);
 
