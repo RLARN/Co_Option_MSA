@@ -99,8 +99,13 @@ public class RequestController {
     //이벤트 요청 승인
     public void requestEventApproval(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         RequestVO requestVO = new RequestVO();
+        ObjectMapper mapper = new ObjectMapper();
+
         try {
+
+            requestVO = mapper.readValue(eventInfoJson, RequestVO.class);
             requestService.requestEventApproval(requestVO);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +115,9 @@ public class RequestController {
     //이벤트 요청 거절
     public void requestEventReject(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
         RequestVO requestVO = new RequestVO();
+        ObjectMapper mapper = new ObjectMapper();
         try {
+            requestVO = mapper.readValue(eventInfoJson, RequestVO.class);
             requestService.requestEventReject(requestVO);
         } catch (Exception e) {
             e.printStackTrace();

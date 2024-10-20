@@ -29,26 +29,6 @@ public class TaskService {
     	// 1 == create success、0 == create fail
     	int check = 0;
 
-    	// test obj
-    	//EventVO eventVO2 = new EventVO();
-
-    	// RegId, UpdId, UserSeq => session에서 가져와서 설정
-/*		taskVO.setTaskNm(taskVO.getTaskNm());
-		taskVO.setTaskDesc(taskVO.getTaskDesc());
-        taskVO.setTaskDate(taskVO.getTaskDate());
-        taskVO.setCompleteYn(taskVO.getCompleteYn());
-        taskVO.setTaskType(taskVO.getTaskType());
-        taskVO.setDeleteYn(taskVO.getDeleteYn());*/
-
-//		taskVO.setTaskNm("chamchi");
-//		taskVO.setTaskDesc("kimcmiMaster");
-//		taskVO.setTaskDate(null);
-//		taskVO.setCompleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_N);
-//		taskVO.setTaskType(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
-//		taskVO.setDeleteYn(taskCommon.TASK_COMM_CD_IS_COMPLETE_Y);
-//        taskVO.setRegId("hammer");
-//		taskVO.setUpdId("hammer");
-
 		check = taskMapper.insertTask(taskVO);
 		System.out.println("check : " + check);
 
@@ -67,6 +47,9 @@ public class TaskService {
 	}
 
 	public List<TaskVO> selectTaskList(TaskVO taskVO) {
+		
+		//공유 task 인지 개인 task 인지 타입 받아야함.
+
 		List<TaskVO> taskList = taskMapper.selectTaskList(taskVO);
 		return taskList;
 	}
