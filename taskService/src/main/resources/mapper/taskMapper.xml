@@ -17,6 +17,7 @@
         <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
         <result property="updDt" column="UPD_DT" jdbcType="DATE" />
         <result property="updId" column="UPD_ID" jdbcType="VARCHAR" />
+		<result property="ownerUserSeq" column="OWNER_USER_SEQ" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -44,6 +45,7 @@
 	        <if test="regId != null">REG_ID,</if>
 	        UPD_DT,
 	        <if test="updId != null">UPD_ID,</if>
+	        <if test="ownerUserSeq != null">OWNER_USER_SEQ,</if>
 	    </trim>
 	
 	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -54,12 +56,13 @@
 			<if test="taskDate != null">#{taskDate},</if>
 			<if test="taskType != null">#{taskType},</if>
 	        'N',
-	        'N',
+			<if test="approvedYn != null">APPROVED_YN,</if>
 	        'N',
 	        NOW(),
 	        <if test="regId != null">#{regId},</if>
 	        NOW(),
 	        <if test="updId != null">#{updId},</if>
+	        <if test="ownerUserSeq != null">#{ownerUserSeq},</if>
 	    </trim>
 	</insert>
 
@@ -79,10 +82,31 @@
 	</update>
 
 	<select id="selectTaskList" parameterType="com.cooption.taskService.vo.TaskVO" resultMap="TaskBaseInfo">
-		SELECT TASK_SEQ, EVENT_SEQ, TASK_NM, TASK_DESC, TASK_DATE, COMPLETE_YN, TASK_TYPE, APPROVED_YN, DELETE_YN, REG_DT, REG_ID, UPD_DT, UPD_ID
-		FROM co_option.task_mst
+		SELECT
+		    TASK_SEQ,
+		    EVENT_SEQ,
+		    TASK_NM,
+		    TASK_DESC,
+		    TASK_DATE,
+		    COMPLETE_YN,
+		    TASK_TYPE,
+		    APPROVED_YN,
+		    DELETE_YN,
+		    REG_DT,
+		    REG_ID,
+		    UPD_DT,
+		    UPD_ID,
+		    OWNER_USER_SEQ
+		FROM
+		    co_option.task_mst
 		WHERE
 			EVENT_SEQ = #{eventSeq}
+		<if test="ownerUserSeq != null">
+			AND OWNER_USER_SEQ = #{ownerUserSeq}
+		</if>
+		<if test="approvedYn != null">
+			AND APPROVED_YN = #{approvedYn}
+		</if>
 	</select>
 	
 	<update id="completeYNChange" parameterType="com.cooption.taskService.vo.TaskVO">

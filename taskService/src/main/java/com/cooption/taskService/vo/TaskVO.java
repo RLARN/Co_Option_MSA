@@ -20,6 +20,8 @@ public class TaskVO {
     private String regId;
     private Date updDt;
     private String updId;
+	private String ownerUserSeq;
+
 	public int getTaskSeq() {
 		return taskSeq;
 	}

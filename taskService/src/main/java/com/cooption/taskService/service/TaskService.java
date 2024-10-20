@@ -49,8 +49,22 @@ public class TaskService {
 	public List<TaskVO> selectTaskList(TaskVO taskVO) {
 		
 		//공유 task 인지 개인 task 인지 타입 받아야함.
+		//공유 task 이면 eventSeq 만 조건에 넣고
 
-		List<TaskVO> taskList = taskMapper.selectTaskList(taskVO);
+		TaskVO taskSearchVO = new TaskVO();
+
+		taskSearchVO.setEventSeq(taskVO.getEventSeq());
+		taskSearchVO.setApprovedYn("Y");
+
+		if (taskVO.getTaskType().equals("share")){//공유 task 가져오기
+			taskSearchVO.setOwnerUserSeq(null);
+
+		} else {
+			taskSearchVO.setOwnerUserSeq(taskVO.getOwnerUserSeq());//개인 task 가져오기
+
+		}
+
+		List<TaskVO> taskList = taskMapper.selectTaskList(taskSearchVO);
 		return taskList;
 	}
 	
