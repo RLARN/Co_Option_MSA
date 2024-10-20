@@ -94,12 +94,12 @@ public class RequestService {
 	public void insertEventRequest(RequestVO requestVO) {
 
 		//일정 등록 프로세스
-		int requestSeq = requestMapper.insertRequest(requestVO);//request MST 등록
+		requestMapper.insertRequest(requestVO);//request MST 등록
+		int requestSeq = requestVO.getRequestSeq();//DB에서 가져온 값.
 
 		System.out.println("requestSeq : " + requestSeq);
 
 		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
-		System.out.println("insertEventRequestRel : " + "ㄹ하ㅣ;ㅓ모ㅜㄴㅇ");
 		requestMapper.insertUserRequestRel(requestVO);//user[] - request 유저 관계 테이블 등록
 
     }
