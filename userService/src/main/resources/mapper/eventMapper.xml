@@ -18,6 +18,18 @@
         <result property="eid" column="EVENT_EID" jdbcType="VARCHAR" />
     </resultMap>
 
+	<resultMap id="UserBaseInfo" type="com.cooption.eventService.vo.UserVO">
+	    <result property="userSeq" column="USER_SEQ" jdbcType="INTEGER" />
+	    <result property="userId" column="USER_ID" jdbcType="VARCHAR" />
+	    <result property="userPwd" column="USER_PWD" jdbcType="VARCHAR" />
+	    <result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
+	    <result property="userMail" column="USER_MAIL" jdbcType="VARCHAR" />
+	    <result property="deleteYn" column="DELETE_YN" jdbcType="VARCHAR" />
+	    <result property="regDt" column="REG_DT" jdbcType="DATE" />
+	    <result property="regId" column="REG_ID" jdbcType="VARCHAR" />
+	    <result property="updDt" column="UPD_DT" jdbcType="DATE" />
+	    <result property="updId" column="UPD_ID" jdbcType="VARCHAR" />
+	</resultMap>
 
 	<!-- useGeneratedKeys="true" keyProperty="eventSeq" => EVENTSEQ리턴값으로 설정 -->
 	<insert id="insertEvent" parameterType="com.cooption.eventService.vo.EventVO" useGeneratedKeys="true" keyProperty="eventSeq">
@@ -64,7 +76,7 @@
 		INSERT INTO co_option.event_user_rel (EVENT_SEQ,USER_SEQ) VALUES(#{eventSeq},#{userSeq})
 	</insert>
 	
-	<select id="getEvent" parameterType="com.cooption.eventService.vo.EventVO">
+	<select id="getEvent" parameterType="com.cooption.eventService.vo.EventVO" resultMap="EventBaseInfo">
 		SELECT
 			EVENT_SEQ, EVENT_NM, EVENT_DESC, EVENT_START_DATE, EVENT_END_DATE, 
 			COMPLETE_YN, DELETE_YN, REG_DT, REG_ID, UPD_DT, UPD_ID, EVENT_EID
@@ -72,6 +84,36 @@
 			co_option.EVENT_MST
 		WHERE
 			EVENT_EID = #{eid}
+	</select>
+	
+	<select id="getEventUser" parameterType="com.cooption.eventService.vo.EventVO" resultMap="UserBaseInfo">
+		SELECT 
+		    USER_SEQ, 
+		    USER_ID, 
+		    USER_PWD, 
+		    USER_NAME, 
+		    USER_MAIL, 
+		    DELETE_YN, 
+		    REG_DT, 
+		    REG_ID, 
+		    UPD_DT, 
+		    UPD_ID
+		FROM 
+		    user_mst UMST 
+		WHERE 
+		    USER_SEQ 
+		IN (
+		    SELECT 
+		        rel.USER_SEQ
+		    from 
+		        EVENT_MST mst 
+		    JOIN 
+		        EVENT_USER_REL rel 
+		    ON 
+		        mst.EVENT_SEQ = rel.EVENT_SEQ 
+		    WHERE 
+		        mst.EVENT_SEQ = #{eventSeq}
+		)
 	</select>
 
 </mapper>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -180,6 +181,10 @@ public class EventService {
     
     public EventVO getEvent(EventVO eventVO) {
     	return eventMapper.getEvent(eventVO);
+    }
+    
+    public List<UserVO> getEventUser(EventVO eventVO) {
+    	return eventMapper.getEventUser(eventVO);
     }
     
 }
