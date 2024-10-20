@@ -46,7 +46,7 @@ public class LoginController {
 
             responseBody.put("userId", userVO.getUserId());
             responseBody.put("userName", userVO.getUserName());
-            responseBody.put("userSeq", toString(userVO.getUserSeq()));
+            responseBody.put("userSeq", Integer.toString(userVO.getUserSeq()));
 
             return ResponseEntity.ok(responseBody);
         }
