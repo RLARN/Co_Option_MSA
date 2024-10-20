@@ -40,23 +40,17 @@ public class taskController {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        //  TaskVO taskVO = new TaskVO();
-
         try {
-            //taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
 
-            // 일정 생성
-            //taskService.createEvent(taskVO);
+            TaskVO taskVO = new TaskVO();
+            taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
 
-            // 일정 DB 등록
-            //taskService.modifyTask(taskVO);
+            // task 수정
+            taskService.modifyTask(taskVO);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //System.out.println("ApprovedYn : " + taskVO.getApprovedYn());
-        //System.out.println("eventVO : " + eventVO);
-
     }
 
     @PostMapping("/selectTaskList")
