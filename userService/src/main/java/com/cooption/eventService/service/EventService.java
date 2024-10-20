@@ -178,9 +178,8 @@ public class EventService {
 	    }
     }
     
-    public EventVO getEventSeq(EventVO eventVO) {
-    	
-    	return null;
+    public EventVO getEvent(EventVO eventVO) {
+    	return eventMapper.getEvent(eventVO);
     }
     
 }

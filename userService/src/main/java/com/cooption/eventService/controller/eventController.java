@@ -81,18 +81,18 @@ public class eventController {
     	eventService.addEventUserRel(eventVO);
     }
     
-    @PostMapping("/getEventSeq")
-    public EventVO getEventSeq(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException{
+    @PostMapping("/getEvent")
+    public EventVO getEvent(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException{
     	ObjectMapper mapper = new ObjectMapper();
         EventVO eventVO = new EventVO();
 
         try {
             eventVO = mapper.readValue(eventInfoJson, EventVO.class);
             // 일정 수정
-            eventService.getEventSeq(eventVO);
+            eventVO = eventService.getEvent(eventVO);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    	return null;
+    	return eventVO;
     }
 }

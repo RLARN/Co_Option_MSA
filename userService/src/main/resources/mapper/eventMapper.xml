@@ -63,5 +63,15 @@
 	<insert id="insertEventUserRel" parameterType="com.cooption.eventService.vo.EventVO">
 		INSERT INTO co_option.event_user_rel (EVENT_SEQ,USER_SEQ) VALUES(#{eventSeq},#{userSeq})
 	</insert>
+	
+	<select id="getEvent" parameterType="com.cooption.eventService.vo.EventVO">
+		SELECT
+			EVENT_SEQ, EVENT_NM, EVENT_DESC, EVENT_START_DATE, EVENT_END_DATE, 
+			COMPLETE_YN, DELETE_YN, REG_DT, REG_ID, UPD_DT, UPD_ID, EVENT_EID
+		FROM
+			co_option.EVENT_MST
+		WHERE
+			EVENT_EID = #{eid}
+	</select>
 
 </mapper>

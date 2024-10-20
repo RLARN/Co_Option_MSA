@@ -11,4 +11,5 @@ public interface EventMapper {
 
 	public int insertEvent(EventVO eventVO);
 	public int insertEventUserRel(EventVO eventVO);
+	public EventVO getEvent(EventVO eventVO);
 }
