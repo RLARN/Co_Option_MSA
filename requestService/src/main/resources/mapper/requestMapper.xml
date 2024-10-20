@@ -100,6 +100,19 @@
 			""
 		</trim>
 	</insert>
+
+	<insert id="insertUserRequestRel" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true">
+		INSERT INTO co_option.REQUEST_USER_REL
+		(REQUEST_SEQ, USER_SEQ, USER_APP_YN)
+		VALUES
+		<foreach collection="arrUserSeq" item="userSeq" separator=",">
+			(
+				#{requestSeq}
+				#{userSeq},
+				#{userAppYn}
+			)
+		</foreach>
+	</insert>
 	
 	
 	<!-- 일정 요청 프로세스 -->
