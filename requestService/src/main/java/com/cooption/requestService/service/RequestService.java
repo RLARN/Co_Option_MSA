@@ -35,21 +35,15 @@ public class RequestService {
 
 		//TASK 등록
 		int taskSeq = taskServiceClient.createTask(taskVO);
-
-		System.out.println("#@##@@@@@@@"+taskSeq);
-		//requestVO.setRequestNm("kimchiRequest");//가데이터
 		requestVO.setTaskSeq(taskSeq);//태스크 등록하고 받아온 값.
 
 		int requestSeq = requestMapper.insertRequest(requestVO);//request MST 등록
 		requestVO.setRequestSeq(requestSeq);
 
 		insertTaskRequestRel(requestVO);//task - request 관계 테이블 등록
-
-		//requestVO.setUserSeq(3);//임의값.
-		//requestVO.setUserAppYn("");//임의값
+		requestVO.setUserAppYn("");//초기값.
 
 		int check = requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
-
 
     }
 
@@ -57,12 +51,10 @@ public class RequestService {
 
 		//TASK 승인 프로세스
 		TaskVO taskVO = new TaskVO();
-		taskVO.setTaskSeq(requestVO.getTaskSeq());//받아와야됨
+		taskVO.setTaskSeq(requestVO.getTaskSeq());
 		taskVO.setApprovedYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_Y);
 		taskServiceClient.modifyTask(taskVO);//task수정
 
-		//requestVO.setUserSeq(3);//받아와야됨
-		//requestVO.setRequestSeq(1);//받아와야됨
 		requestVO.setUserAppYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_Y);
 		requestMapper.modifyUserRequestRel(requestVO);
 	}
@@ -70,9 +62,7 @@ public class RequestService {
 	public void requestTaskReject(RequestVO requestVO){
 
 		//TASK 거절프로세스
-		//TaskVO taskVO = new TaskVO();
 		requestVO.setUserAppYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_N);
-
 		requestMapper.modifyUserRequestRel(requestVO);
 	}
 
@@ -102,15 +92,9 @@ public class RequestService {
 
 	// 일정 요청 프로세스
 	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
-		
-		requestMapper.insertRequest(requestVO);//request MST 등록
-		
-		int requestSeq = requestVO.getRequestSeq();
-		requestVO.setRequestSeq(requestSeq);
-		
+
+		int requestSeq = requestMapper.insertRequest(requestVO);//request MST 등록
 		requestMapper.insertEventRequestRel(requestVO);//event - request 관계 테이블 등록
-		
-		// userseq리스트로 받아서 등록
 		requestMapper.insertUserRequestRel(requestVO);//user[] - request 유저 관계 테이블 등록
 
     }
@@ -124,9 +108,6 @@ public class RequestService {
 		EventVO eventVO = new EventVO();
 		eventVO.setEventSeq(requestVO.getEventSeq());
 		eventVO.setUserSeq(requestVO.getUserSeq());
-
-		//requestVO.setUserSeq(10);
-		//requestVO.setRequestSeq(10);
 		
 		System.out.println("requestVOrequestVOrequestVO : " + requestVO.getEventSeq() + " : " + requestVO.getRequestSeq());
 		
@@ -136,14 +117,12 @@ public class RequestService {
 	
 	
 	public void requestEventReject(RequestVO requestVO){
-		//requestVO.setUserSeq(10);
-		//requestVO.setRequestSeq(10);
 		requestMapper.requestEventReject(requestVO);
-		
 	}
 
 
     public List<RequestVO> selectRequestList(RequestVO requestVO) {
+
 		List<RequestVO> requestVOList = new ArrayList<RequestVO>();
 		requestVOList = requestMapper.selectRequestList(requestVO);
 
