@@ -18,7 +18,7 @@
     </resultMap>
 
 
-	<!-- useGeneratedKeys="true" keyProperty="requestSeq" => requestSEQ리턴값으로 설정 -->
+	<!--useGeneratedKeys="true" keyProperty="requestSeq"> requestSEQ리턴값으로 설정 -->
 	<insert id="insertRequest" parameterType="com.cooption.requestService.vo.RequestVO" useGeneratedKeys="true" keyProperty="requestSeq">
 	    <!-- `USER_SEQ` 값을 생성 -->
 	    <selectKey keyProperty="requestSeq" resultType="Integer" order="BEFORE">
