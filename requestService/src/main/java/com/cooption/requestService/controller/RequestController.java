@@ -45,7 +45,7 @@ public class RequestController {
     
     @PostMapping("/addEventRequest")
     //일정참가 요청
-    public void addEventRequest(@RequestBody String eventInfoJson) throws GeneralSecurityException, IOException {
+    public void addEventRequest(@RequestBody String requestInfoJson) throws GeneralSecurityException, IOException {
 
     	ObjectMapper mapper = new ObjectMapper();
     	RequestVO requestVO = new RequestVO();
@@ -58,13 +58,8 @@ public class RequestController {
             //요청 Desc 보낼꺼다.
 
     		// eventseq취득하기 위해 파싱
-            //List<Map<String, String>> userVO();
-            List<Map<String, String>> chuga;
-    		//eventVO = mapper.readValue(eventInfoJson, EventVO.class);
-            //chuga = mapper.readValue(eventInfoJson, EventVO.class);
-    		//eventVO.setEventSeq(1);
+            requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
 	    	requestService.insertEventRequest(requestVO, eventVO);
-
 
         } catch (Exception e) {
             e.printStackTrace();

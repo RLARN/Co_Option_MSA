@@ -20,11 +20,14 @@ public class RequestVO {
     private String userAppYn;
 
 	private String userId;//수신자.
+	private String[] arrUserId;
+	private String[] arrUserSeq;
 
     private Date regDt;
     private String regId;
     private Date updDt;
     private String updId;
+
 	public int getRequestSeq() {
 		return requestSeq;
 	}

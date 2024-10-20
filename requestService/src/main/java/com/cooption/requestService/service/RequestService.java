@@ -103,9 +103,8 @@ public class RequestService {
 	// 일정 요청 프로세스
 	public void insertEventRequest(RequestVO requestVO, EventVO eventVO) {
 
-		//requestVO.setEventSeq(eventVO.getEventSeq());
-		//requestVO.setRequestNm("123");//가데이터
-		//requestVO.setUserSeq(10);
+		//여기서 유저 서비스에서 유저 정보 get 해와서 requestVO arrUserSeq; 에 저장 해야한다.
+		//그 뒤에 아래 로직 수행 해야한다.
 		
 		requestMapper.insertRequest(requestVO);//request MST 등록
 		

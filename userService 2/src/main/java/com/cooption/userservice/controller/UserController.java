@@ -75,7 +75,7 @@ public class UserController {
         return userList;
     }
 
-    @PostMapping("/selectNonEventUserList")//EventSeq 받아오면 해당 이벤트에 참가한 유저 리스트 출력
+    @PostMapping("/selectNonEventUserList")//EventSeq 받아오면 해당 이벤트에 참가 안한 유저 리스트 출력
     @ResponseBody
     public List<UserVO> selectNonEventUserList(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
 
