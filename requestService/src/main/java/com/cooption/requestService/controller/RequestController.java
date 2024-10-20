@@ -23,21 +23,20 @@ public class RequestController {
 
     @PostMapping("/addTaskRequest")
     //여기로 테스크 요청이 들어온다
-    public void createTask() throws GeneralSecurityException, IOException {
+    public void createTask(@RequestBody String requestInfoJson) throws GeneralSecurityException, IOException {
 
-    	//ObjectMapper mapper = new ObjectMapper();
+    	ObjectMapper mapper = new ObjectMapper();
     	RequestVO requestVO = new RequestVO();
 
     	try {
             // task 등록
+            requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
 	    	requestService.insertTaskRequest(requestVO);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    	//System.out.println("eventVO : " + eventVO);
-    	
     }
     
     @PostMapping("/addEventRequest")
@@ -50,64 +49,49 @@ public class RequestController {
     	
     	try {
 
-            //이벤트 아이디 보낼꺼고
-            //유저 정보를 배열로 보낼꺼다.
-            //요청 Desc 보낼꺼다.
-
             requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
 	    	requestService.insertEventRequest(requestVO, eventVO);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    	//System.out.println("eventVO : " + eventVO);
     	
     }
 
     @PostMapping("/requestTaskApproval")
     //task 요청 승인
-    public void requestTaskApproval() throws GeneralSecurityException, IOException {
+    public void requestTaskApproval(@RequestBody String requestInfoJson) throws GeneralSecurityException, IOException {
 
-        //ObjectMapper mapper = new ObjectMapper();
-
+        ObjectMapper mapper = new ObjectMapper();
         RequestVO requestVO = new RequestVO();
 
         try {
 
             // task 등록
-            //requestService.insertTaskRequest(requestVO);
+            requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
             requestService.requestTaskApproval(requestVO);
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //System.out.println("eventVO : " + eventVO);
-
     }
 
     @PostMapping("/requestTaskReject")
     //task 요청 거절
-    public void requestTaskReject() throws GeneralSecurityException, IOException {
+    public void requestTaskReject(@RequestBody String requestInfoJson) throws GeneralSecurityException, IOException {
 
-        //ObjectMapper mapper = new ObjectMapper();
-
+        ObjectMapper mapper = new ObjectMapper();
         RequestVO requestVO = new RequestVO();
 
         try {
 
             // task 등록
-            //requestService.insertTaskRequest(requestVO);
+            requestVO = mapper.readValue(requestInfoJson, RequestVO.class);
             requestService.requestTaskReject(requestVO);
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //System.out.println("eventVO : " + eventVO);
 
     }
 
