@@ -20,6 +20,7 @@ public class RequestVO {
     private String userAppYn;
 
 	private String userId;//수신자.
+
 	private String[] arrUserId;
 	private String[] arrUserSeq;
 

@@ -67,18 +67,26 @@
 
 
 	<update id="modifyTask" parameterType="com.cooption.taskService.vo.TaskVO">
+		<selectKey keyProperty="taskSeq" resultType="Integer" order="BEFORE">
+			SELECT TASK_SEQ
+			FROM co_option.task_request_rel
+			WHERE REQUEST_SEQ = #{requestSeq}
+		</selectKey>
+
+		<!-- 업데이트 쿼리 -->
 		UPDATE co_option.TASK_MST
 		<set>
 			<if test="taskNm != null">TASK_NM = #{taskNm},</if>
 			<if test="taskType != null">TASK_TYPE = #{taskType},</if>
 			<if test="completeYn != null">COMPLETE_YN = #{completeYn},</if>
-			<if test="approvedYn!= null">APPROVED_YN = #{approvedYn},</if>
+			<if test="approvedYn != null">APPROVED_YN = #{approvedYn},</if>
 			<if test="deleteYn != null">DELETE_YN = #{deleteYn},</if>
 			UPD_DT = NOW(),
 			<if test="updId != null">UPD_ID = #{updId},</if>
 		</set>
 		WHERE TASK_SEQ = #{taskSeq}
 	</update>
+
 
 	<select id="selectTaskList" parameterType="com.cooption.taskService.vo.TaskVO" resultMap="TaskBaseInfo">
 		SELECT

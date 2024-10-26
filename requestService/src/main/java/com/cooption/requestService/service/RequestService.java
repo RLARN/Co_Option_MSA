@@ -37,18 +37,32 @@ public class RequestService {
 		taskVO.setTaskDesc(requestVO.getRequestDesc());
 		taskVO.setOwnerUserSeq(String.valueOf(requestVO.getUserSeq()));//요청 받는 사람
 		taskVO.setEventSeq(requestVO.getEventSeq());
+		taskVO.setTaskType("N");
+		taskVO.setDeleteYn("N");
+		taskVO.setRegId(requestVO.getRegId());
+		taskVO.setUpdId(requestVO.getUpdId());
 
 		//TASK 등록
 		int taskSeq = taskServiceClient.createTask(taskVO);
 		requestVO.setTaskSeq(taskSeq);//태스크 등록하고 받아온 값.
 
-		int requestSeq = requestMapper.insertRequest(requestVO);//request MST 등록
-		requestVO.setRequestSeq(requestSeq);
+		System.out.println("taskSeq : " + taskSeq);
+
+		requestMapper.insertRequest(requestVO);//request MST 등록
+		//requestVO.setRequestSeq(requestSeq);
+
+		System.out.println("requestSeq : " + requestVO.getRequestSeq());
 
 		insertTaskRequestRel(requestVO);//task - request 관계 테이블 등록
 		requestVO.setUserAppYn("");//초기값.
 
+		String[] kimchi = new String[1];
+		kimchi[0] = String.valueOf(requestVO.getUserSeq());
+		requestVO.setArrUserSeq(kimchi);
+
 		int check = requestMapper.insertUserRequestRel(requestVO);//user - request 유저 관계 테이블 등록
+
+		System.out.println("check : " + check);
 
     }
 
@@ -56,7 +70,8 @@ public class RequestService {
 
 		//TASK 승인 프로세스
 		TaskVO taskVO = new TaskVO();
-		taskVO.setTaskSeq(requestVO.getTaskSeq());
+		taskVO.setRequestSeq(requestVO.getRequestSeq());
+		//taskVO.setTaskSeq(requestVO.getTaskSeq());
 		taskVO.setApprovedYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_Y);
 		taskServiceClient.modifyTask(taskVO);//task수정
 

@@ -9,6 +9,7 @@ public class TaskVO {
 
     private int taskSeq;
     private int eventSeq;
+	private int requestSeq;
     private String taskNm;
     private String taskDesc;
     private Date taskDate;

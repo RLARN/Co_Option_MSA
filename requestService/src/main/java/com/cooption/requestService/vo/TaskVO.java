@@ -22,6 +22,7 @@ public class TaskVO {
     private String updId;
 	private String ownerUserSeq;
 	private double completionRate;
+	private int requestSeq;
 
 	public int getTaskSeq() {
 		return taskSeq;
