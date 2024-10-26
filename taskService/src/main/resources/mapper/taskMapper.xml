@@ -21,49 +21,48 @@
     </resultMap>
 
 
-	<!-- useGeneratedKeys="true" keyProperty="taskSeq" => taskSEQ리턴값으로 설정 -->
-	<insert id="insertTask" parameterType="com.cooption.taskService.vo.TaskVO" useGeneratedKeys="true" keyProperty="eventSeq">
-	    <!-- `USER_SEQ` 값을 생성 -->
-	    <selectKey keyProperty="taskSeq" resultType="Integer" order="BEFORE">
-	        SELECT COALESCE(MAX(TASK_SEQ), 0) + 1 AS taskSeq 
-	        FROM co_option.TASK_MST
-	    </selectKey>
-	
-	    <!-- INSERT 문 -->
-	    INSERT INTO co_option.TASK_MST
-	    <trim prefix="(" suffix=")" suffixOverrides=",">
-	        <if test="taskSeq != null">TASK_SEQ,</if>
+	<insert id="insertTask" parameterType="com.cooption.taskService.vo.TaskVO" useGeneratedKeys="true" keyProperty="taskSeq">
+		<!-- `taskSeq` 값을 생성 -->
+		<selectKey keyProperty="taskSeq" resultType="Integer" order="BEFORE">
+			SELECT COALESCE(MAX(TASK_SEQ), 0) + 1 AS taskSeq
+			FROM co_option.TASK_MST
+		</selectKey>
+
+		<!-- INSERT 문 -->
+		INSERT INTO co_option.TASK_MST
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskSeq != null">TASK_SEQ,</if>
 			<if test="eventSeq != null">EVENT_SEQ,</if>
-	        <if test="taskNm != null">TASK_NM,</if>
-	        <if test="taskDesc != null">TASK_DESC,</if>
-	        TASK_DATE,
+			<if test="taskNm != null">TASK_NM,</if>
+			<if test="taskDesc != null">TASK_DESC,</if>
+			<if test="taskDate != null">TASK_DATE,</if>
 			<if test="taskType != null">TASK_TYPE,</if>
-	        COMPLETE_YN,
-	        APPROVED_YN,
-	        DELETE_YN,
-	        REG_DT,
-	        <if test="regId != null">REG_ID,</if>
-	        UPD_DT,
-	        <if test="updId != null">UPD_ID,</if>
-	        <if test="ownerUserSeq != null">OWNER_USER_SEQ,</if>
-	    </trim>
-	
-	    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
-	        <if test="taskSeq != null">#{taskSeq},</if>
+			COMPLETE_YN,
+			<if test="approvedYn != null">APPROVED_YN,</if>
+			DELETE_YN,
+			REG_DT,
+			<if test="regId != null">REG_ID,</if>
+			UPD_DT,
+			<if test="updId != null">UPD_ID,</if>
+			<if test="ownerUserSeq != null">OWNER_USER_SEQ,</if>
+		</trim>
+
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="taskSeq != null">#{taskSeq},</if>
 			<if test="eventSeq != null">#{eventSeq},</if>
-	        <if test="taskNm != null">#{taskNm},</if>
-	        <if test="taskDesc != null">#{taskDesc},</if>
+			<if test="taskNm != null">#{taskNm},</if>
+			<if test="taskDesc != null">#{taskDesc},</if>
 			<if test="taskDate != null">#{taskDate},</if>
 			<if test="taskType != null">#{taskType},</if>
-	        'N',
-			<if test="approvedYn != null">APPROVED_YN,</if>
-	        'N',
-	        NOW(),
-	        <if test="regId != null">#{regId},</if>
-	        NOW(),
-	        <if test="updId != null">#{updId},</if>
-	        <if test="ownerUserSeq != null">#{ownerUserSeq},</if>
-	    </trim>
+			'N',  <!-- COMPLETE_YN 하드코딩 -->
+			<if test="approvedYn != null">#{approvedYn},</if> <!-- approvedYn을 동적으로 매핑 -->
+			'N',  <!-- DELETE_YN 하드코딩 -->
+			NOW(),
+			<if test="regId != null">#{regId},</if>
+			NOW(),
+			<if test="updId != null">#{updId},</if>
+			<if test="ownerUserSeq != null">#{ownerUserSeq},</if>
+		</trim>
 	</insert>
 
 
