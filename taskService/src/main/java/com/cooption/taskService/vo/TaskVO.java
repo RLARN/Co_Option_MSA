@@ -21,7 +21,7 @@ public class TaskVO {
     private Date updDt;
     private String updId;
 	private String ownerUserSeq;
-	private String completionRate;
+	private double completionRate;
 
 	public int getTaskSeq() {
 		return taskSeq;

@@ -66,7 +66,7 @@ public class taskController {
 
     @PostMapping("/getTaskCompletionRate")
     @ResponseBody
-    public String getTaskCompletionRate (@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
+    public TaskVO  getTaskCompletionRate (@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
     //일정 완료율 계산 후 return
         ObjectMapper mapper = new ObjectMapper();
         TaskVO taskVO = mapper.readValue(taskInfoJson, TaskVO.class);

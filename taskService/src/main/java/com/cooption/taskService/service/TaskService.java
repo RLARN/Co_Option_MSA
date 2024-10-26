@@ -74,7 +74,7 @@ public class TaskService {
 		taskMapper.completeYNChange(taskVO);
 	}
 
-	public String getTaskCompletionRate(TaskVO taskVO) {
+	public TaskVO getTaskCompletionRate(TaskVO taskVO) {
 
 		TaskVO taskSearchVO = new TaskVO();
 
@@ -96,7 +96,8 @@ public class TaskService {
 		double completionRate = (totalCount > 0) ? ((double) completedCount / totalCount) * 100 : 0;
 
 		System.out.println("completionRate : " + completionRate);
-
-		return Math.round(completionRate) + "%";
+		TaskVO returnTaskVO = new TaskVO();
+		returnTaskVO.setCompletionRate(completionRate);
+		return returnTaskVO;
 	}
 }
