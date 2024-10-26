@@ -56,7 +56,8 @@ public class TaskService {
 		taskSearchVO.setEventSeq(taskVO.getEventSeq());
 		taskSearchVO.setApprovedYn("Y");
 
-		if (taskVO.getTaskType().equals("share")){//공유 task 가져오기
+
+		if (taskVO.getTaskType().equals("Y")){//공유 task 가져오기
 			taskSearchVO.setOwnerUserSeq(null);
 
 		} else {
@@ -65,10 +66,37 @@ public class TaskService {
 		}
 
 		List<TaskVO> taskList = taskMapper.selectTaskList(taskSearchVO);
+
 		return taskList;
 	}
 	
 	public void completeYNChange(TaskVO taskVO) {
 		taskMapper.completeYNChange(taskVO);
+	}
+
+	public String getTaskCompletionRate(TaskVO taskVO) {
+
+		TaskVO taskSearchVO = new TaskVO();
+
+		taskSearchVO.setEventSeq(taskVO.getEventSeq());
+		taskSearchVO.setApprovedYn("Y");
+
+		List<TaskVO> taskList2 = taskMapper.selectTaskList(taskSearchVO);
+
+		// 전체 갯수
+		int totalCount = taskList2.size();
+		System.out.println("totalCount : " + totalCount);
+
+		// COMPLETE_YN이 "Y"인 항목의 갯수 계산
+		long completedCount = taskList2.stream()
+				.filter(task -> "Y".equals(task.getCompleteYn()))
+				.count();
+
+		// 완료율 계산
+		double completionRate = (totalCount > 0) ? ((double) completedCount / totalCount) * 100 : 0;
+
+		System.out.println("completionRate : " + completionRate);
+
+		return Math.round(completionRate) + "%";
 	}
 }

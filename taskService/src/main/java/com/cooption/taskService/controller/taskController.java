@@ -63,6 +63,16 @@ public class taskController {
         List<TaskVO> taskList = taskService.selectTaskList(taskVO);
         return taskList;
     }
+
+    @PostMapping("/getTaskCompletionRate")
+    @ResponseBody
+    public String getTaskCompletionRate (@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
+    //일정 완료율 계산 후 return
+        ObjectMapper mapper = new ObjectMapper();
+        TaskVO taskVO = mapper.readValue(taskInfoJson, TaskVO.class);
+
+        return taskService.getTaskCompletionRate(taskVO);
+    }
     
     @PostMapping("/completeYNChange")
     public void completeYNChange(@RequestBody String taskInfoJson) throws GeneralSecurityException, IOException {
