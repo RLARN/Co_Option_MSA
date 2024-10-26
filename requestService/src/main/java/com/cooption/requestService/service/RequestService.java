@@ -33,6 +33,10 @@ public class RequestService {
 		//TASK 요청프로세스
 		TaskVO taskVO = new TaskVO();
 		taskVO.setApprovedYn(RequestCommon.REQUEST_COMM_CD_IS_COMPLETE_N);//요청 미승인 상태
+		taskVO.setTaskNm(requestVO.getRequestNm());
+		taskVO.setTaskDesc(requestVO.getRequestDesc());
+		taskVO.setOwnerUserSeq(String.valueOf(requestVO.getUserSeq()));//요청 받는 사람
+		taskVO.setEventSeq(requestVO.getEventSeq());
 
 		//TASK 등록
 		int taskSeq = taskServiceClient.createTask(taskVO);
