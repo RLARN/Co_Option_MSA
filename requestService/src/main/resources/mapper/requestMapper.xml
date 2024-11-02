@@ -173,6 +173,6 @@
 		WHERE
 			um.USER_ID = #{userId}
 		AND
-		    rel.USER_APP_YN NOT IN('Y')
+		    rel.USER_APP_YN is null
 	</select>
 </mapper>

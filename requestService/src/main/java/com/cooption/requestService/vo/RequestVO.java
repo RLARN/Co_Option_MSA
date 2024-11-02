@@ -2,6 +2,7 @@ package com.cooption.requestService.vo;
 
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.Date;
 
 @Data
@@ -118,6 +119,33 @@ public class RequestVO {
 	}
 	public void setUpdId(String updId) {
 		this.updId = updId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String[] getArrUserId() {
+		return arrUserId;
+	}
+	public void setArrUserId(String[] arrUserId) {
+		this.arrUserId = arrUserId;
+	}
+	public String[] getArrUserSeq() {
+		return arrUserSeq;
+	}
+	public void setArrUserSeq(String[] arrUserSeq) {
+		this.arrUserSeq = arrUserSeq;
+	}
+	@Override
+	public String toString() {
+		return "RequestVO [requestSeq=" + requestSeq + ", requestNm=" + requestNm + ", requestDesc=" + requestDesc
+				+ ", requestSenderId=" + requestSenderId + ", completeYn=" + completeYn + ", requestType=" + requestType
+				+ ", deleteYn=" + deleteYn + ", eventSeq=" + eventSeq + ", userSeq=" + userSeq + ", taskSeq=" + taskSeq
+				+ ", userAppYn=" + userAppYn + ", userId=" + userId + ", arrUserId=" + Arrays.toString(arrUserId)
+				+ ", arrUserSeq=" + Arrays.toString(arrUserSeq) + ", regDt=" + regDt + ", regId=" + regId + ", updDt="
+				+ updDt + ", updId=" + updId + "]";
 	}
 
 }

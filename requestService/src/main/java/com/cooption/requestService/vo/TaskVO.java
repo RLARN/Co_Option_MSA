@@ -102,12 +102,32 @@ public class TaskVO {
 	public void setUpdId(String updId) {
 		this.updId = updId;
 	}
+	public String getOwnerUserSeq() {
+		return ownerUserSeq;
+	}
+	public void setOwnerUserSeq(String ownerUserSeq) {
+		this.ownerUserSeq = ownerUserSeq;
+	}
+	public double getCompletionRate() {
+		return completionRate;
+	}
+	public void setCompletionRate(double completionRate) {
+		this.completionRate = completionRate;
+	}
+	public int getRequestSeq() {
+		return requestSeq;
+	}
+	public void setRequestSeq(int requestSeq) {
+		this.requestSeq = requestSeq;
+	}
 	@Override
 	public String toString() {
 		return "TaskVO [taskSeq=" + taskSeq + ", eventSeq=" + eventSeq + ", taskNm=" + taskNm + ", taskDesc=" + taskDesc
 				+ ", taskDate=" + taskDate + ", completeYn=" + completeYn + ", taskType=" + taskType + ", approvedYn="
 				+ approvedYn + ", deleteYn=" + deleteYn + ", regDt=" + regDt + ", regId=" + regId + ", updDt=" + updDt
-				+ ", updId=" + updId + "]";
+				+ ", updId=" + updId + ", ownerUserSeq=" + ownerUserSeq + ", completionRate=" + completionRate
+				+ ", requestSeq=" + requestSeq + "]";
 	}
+	
 
 }

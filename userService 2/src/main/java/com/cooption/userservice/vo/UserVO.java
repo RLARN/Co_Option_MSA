@@ -80,10 +80,23 @@ public class UserVO {
 	public void setUpdId(String updId) {
 		this.updId = updId;
 	}
+	public int getEventSeq() {
+		return eventSeq;
+	}
+	public void setEventSeq(int eventSeq) {
+		this.eventSeq = eventSeq;
+	}
+	public String getEid() {
+		return eid;
+	}
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [userSeq=" + userSeq + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", userMail=" + userMail + ", deleteYn=" + deleteYn + ", regDt=" + regDt + ", regId=" + regId
-				+ ", updDt=" + updDt + ", updId=" + updId + "]";
+				+ ", updDt=" + updDt + ", updId=" + updId + ", eventSeq=" + eventSeq + ", eid=" + eid + "]";
 	}
+	
 }
