@@ -25,6 +25,9 @@ public class UserService {
     }
 	*/
 	public void createUser(UserVO userVO) {
+
+		userVO.setRegId("sysadm");
+		userVO.setUpdId("sysadm");
 		
 /*		// test obj
 		UserVO userVO2 = new UserVO();
