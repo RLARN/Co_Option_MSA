@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*", allowCredentials = "true")
 @RestController
@@ -34,12 +36,12 @@ public class UserController {
     
     // DB insert
     @PostMapping("/createUser")
-    public void createUser(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
-
+    public ResponseEntity<Map<String, String>> createUser(@RequestBody String userInfoJson) throws GeneralSecurityException, IOException {
+        Map<String, String> responseBody = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
         UserVO userVO = mapper.readValue(userInfoJson, UserVO.class);
     	userService.createUser(userVO);
-    	
+        return ResponseEntity.ok(responseBody);
     }
 
     @PostMapping("/selectUserList")//전체 유저리스트 출력.
